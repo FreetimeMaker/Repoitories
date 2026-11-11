@@ -220,7 +220,10 @@ jobs:
           PY
             UPDATED_COUNT=$((UPDATED_COUNT + 1))
           done < <(find update-results -type f -name result.json | sort)
-          if [ "$UPDATED_COUNT" -eq 0 ]; then
+          # Refresh upstream corrections even when no new app version was released.
+          bash ./changelogs.sh
+          python3 ./sync-fastlane.py
+          if [ "$UPDATED_COUNT" -eq 0 ] && [ -z "$(git status --porcelain -- metadata)" ]; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi

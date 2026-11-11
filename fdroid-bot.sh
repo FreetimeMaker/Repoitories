@@ -217,6 +217,10 @@ else
 fi
 
 echo
+echo "==> Refreshing upstream descriptions, icons and screenshots..."
+python3 ./sync-fastlane.py
+
+echo
 echo "==> Updating repository..."
 echo "fdroid update"
 

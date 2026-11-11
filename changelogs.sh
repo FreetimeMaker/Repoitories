@@ -102,17 +102,18 @@ for METADATA_FILE in "${METADATA_FILES[@]}"; do
             echo "    Removing invalid GitHub 404 payload:"
             echo "    $CHANGELOG_FILE"
             rm -f "$CHANGELOG_FILE"
-        else
-            echo "    Changelog already exists:"
-            echo "    $CHANGELOG_FILE"
-            continue
         fi
     fi
 
     echo "    Repository: $GITHUB_REPO"
     echo "    Searching Fastlane changelog..."
 
-    CHANGELOG=""
+    # Upstream can correct metadata after a release without moving its tag.
+    CHANGELOG="$(github_raw_content "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt" || true)"
+
+    if [ -z "$CHANGELOG" ]; then
+        CHANGELOG="$(github_raw_content "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt" || true)"
+    fi
 
     if [ -z "$CHANGELOG" ]; then
         CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt?ref=v$VERSION"             || true)"
@@ -130,13 +131,6 @@ for METADATA_FILE in "${METADATA_FILES[@]}"; do
         CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt?ref=$VERSION"             || true)"
     fi
 
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt"             || true)"
-    fi
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt"             || true)"
-    fi
 
     if [ -z "$CHANGELOG" ]; then
         echo "    Fastlane changelog not found."
@@ -156,7 +150,7 @@ for METADATA_FILE in "${METADATA_FILES[@]}"; do
 
     printf '%s\n' "$CHANGELOG"         | tr -d '\r'         > "$CHANGELOG_FILE"
 
-    echo "    ✓ Created:"
+    echo "    ✓ Updated:"
     echo "      $CHANGELOG_FILE"
 done
 
