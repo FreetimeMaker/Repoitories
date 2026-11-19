@@ -17,5 +17,5 @@ if ! git diff --cached --quiet -- "${paths[@]}"; then
     git -c user.name='github-actions[bot]' \
         -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
         commit -m "Update ${kind^^} repository" -- "${paths[@]}"
-    git push origin HEAD:refs/heads/main
+    bash packaging/push-main.sh
 fi

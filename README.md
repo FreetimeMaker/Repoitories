@@ -27,8 +27,8 @@ An update to one package format does not replace the other formats.
    for updates hourly and can also be run manually from `main`.
 4. Each successful update run triggers **Deploy Freetime Repository**. You can
    also run it manually. Branch rules must let the update workflows push to
-   `main`. If concurrent pushes conflict, rerun the failed update against the
-   new `main` rather than force-pushing.
+   `main`. Updates automatically fetch, rebase, and retry if `main` advances.
+   If generated files conflict, rerun the update against the new `main`.
 
 The deploy uses only committed public package paths and never includes local
 private keys or F-Droid build configuration. GitHub Pages has a 1 GB published

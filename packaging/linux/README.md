@@ -58,8 +58,8 @@ republish key material when the primary fingerprint has not changed.
 Successful builds commit the generated `apt/` or `yum/` tree, `public.gpg`,
 and that format's source state together to `main` using `GITHUB_TOKEN`. The repository's branch
 rules must permit that push. Pushes are never forced; if another workflow
-advances `main` before the push, rerun the failed workflow against current
-`main`. The Pages workflow listens for successful Linux updates via `workflow_run`. A push by `GITHUB_TOKEN` does not trigger a
+advances `main` before the push, the workflow fetches and rebases before retrying.
+If the rebase conflicts, rerun against current `main`. The Pages workflow listens for successful Linux updates via `workflow_run`. A push by `GITHUB_TOKEN` does not trigger a
 new push workflow. Check that Pages deployed the update before using it.
 
 ## Client setup

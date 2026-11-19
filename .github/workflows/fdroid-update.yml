@@ -254,8 +254,7 @@ jobs:
             exit 0
           fi
           git commit -m "Update F-Droid apps [fdroid-auto-update]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          bash ../packaging/push-main.sh
 
   update-repository:
     name: Update F-Droid repository on main
@@ -406,5 +405,4 @@ jobs:
             exit 0
           fi
           git commit -m "Update F-Droid repository [fdroid-generated]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          bash ../packaging/push-main.sh

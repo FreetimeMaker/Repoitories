@@ -76,7 +76,7 @@ else
             --resign "$package"
         result=$(rpmkeys --dbpath "$private/rpmdb" --checksig --verbose "$package")
         # checksig alone can succeed on a package that has digests but no signature.
-        grep -Eq 'Signature.*: OK$' <<< "$result" || { echo "$result" >&2; exit 1; }
+        grep -Eiq '[[:space:]]signature([[:space:],:]|$).*: OK[[:space:]]*$' <<< "$result" || { echo "$result" >&2; exit 1; }
     done
     createrepo_c --checksum sha256 .
     "${sign[@]}" --armor --output repodata/repomd.xml.asc --detach-sign repodata/repomd.xml

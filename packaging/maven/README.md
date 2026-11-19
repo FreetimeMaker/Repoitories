@@ -4,7 +4,8 @@
 `main`, and on pushes to `main` that change the updater or its workflow. It
 checks out `main`, syncs to the root `maven/` directory, and commits and pushes
 only changed Maven files and the Freetime-Core release marker. It does not force-push; if `main` advances in the
-meantime, rerun the job. Branch rules must allow the Actions token to push.
+meantime, it fetches, rebases, and retries. If the rebase conflicts, rerun the job.
+Branch rules must allow the Actions token to push.
 
 ## Freetime-Core releases
 
