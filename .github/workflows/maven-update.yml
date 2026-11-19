@@ -89,7 +89,7 @@ jobs:
           set -euo pipefail
           bash ./gradlew --no-daemon stagePublications -PreleaseVersion="${TAG#v}"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: steps.release.outputs.tag != ''
         with:
           name: freetime-core-maven
@@ -112,7 +112,7 @@ jobs:
       - name: Sync Maven files
         run: python3 packaging/maven/sync.py
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         if: needs.build.result == 'success' && needs.build.outputs.tag != ''
         with:
           name: freetime-core-maven
