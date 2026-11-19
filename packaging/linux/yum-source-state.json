@@ -1,0 +1,13 @@
+{
+  "fingerprint": "E0C7B84FAF8A9BD74ED0D40592F06B1023F0829A",
+  "assets": [
+    {
+      "url": "https://github.com/FreetimeMaker/XMRiGUI-Linux/releases/download/v2.0.0/xmrigui-2.0.0-1.fc44.x86_64.rpm",
+      "sha256": "6164b05f8c5944523d420397a8d425032d6e9a58fdb7205e49b47aeec95962b4"
+    },
+    {
+      "url": "https://github.com/FreetimeMaker/gemfury-cli/releases/download/v1.0.0/fury-cli-1.0.0-1.fc44.x86_64.rpm",
+      "sha256": "54d6c36729c98131b7ce2d0f27ef124e925e0c3c9171be3cb6629b9ac3b708c6"
+    }
+  ]
+}
