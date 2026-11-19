@@ -60,6 +60,9 @@ force_current_build() {
         exit 1
     fi
 
+    # A repository index refresh does not need to rebuild a published version.
+    [ ! -f "repo/${app_id}_${version_code}.apk" ] || return 0
+
     local unsigned_apk="unsigned/${app_id}_${version_code}.apk"
     local test_apk="tmp/${app_id}_${version_code}.apk"
     local test_src="tmp/${app_id}_${version_code}_src.tar.gz"
@@ -113,6 +116,11 @@ sign_with_developer_key() {
 
     local unsigned_apk="unsigned/${app_id}_${version_code}.apk"
     local signed_apk="repo/${app_id}_${version_code}.apk"
+
+    if [ -f "$signed_apk" ]; then
+        apksigner verify "$signed_apk"
+        return 0
+    fi
 
     if [ ! -f "$unsigned_apk" ]; then
         echo "::error::Expected source-built APK not found: $unsigned_apk"

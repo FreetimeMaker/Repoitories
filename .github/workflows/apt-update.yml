@@ -30,6 +30,7 @@ jobs:
       - name: Resolve and fetch packages
         id: packages
         env:
+          GH_TOKEN: ${{ github.token }}
           LINUX_GPG_FINGERPRINT: ${{ vars.LINUX_GPG_FINGERPRINT }}
         run: python3 packaging/linux/fetch.py apt "$RUNNER_TEMP/linux-repo"
 

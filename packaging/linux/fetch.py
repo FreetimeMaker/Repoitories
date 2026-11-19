@@ -60,15 +60,20 @@ def validate(entries, extension):
 
 def latest_release(repo):
     url = f"https://api.github.com/repos/{repo}/releases/latest"
+    token = os.environ.get("GH_TOKEN")
+    # Read credentials from stdin, not curl arguments or error messages.
+    auth = ["--header", "@-"] if token else []
     response = subprocess.check_output(
         [
             *CURL,
+            *auth,
             "--header",
             "Accept: application/vnd.github+json",
             "--header",
             "X-GitHub-Api-Version: 2022-11-28",
             url,
-        ]
+        ],
+        input=f"Authorization: Bearer {token}\n".encode() if token else None,
     )
     return json.loads(response)
 

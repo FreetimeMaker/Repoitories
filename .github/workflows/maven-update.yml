@@ -67,8 +67,17 @@ jobs:
           if (( sdk >= 37 )); then
             platform+=.0
           fi
-          sdkmanager "platforms;$platform"
-          test -f "$ANDROID_HOME/platforms/$platform/android.jar"
+          sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          sdkmanager="$sdk_root/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "$sdkmanager" ]]; then
+            sdkmanager=$(find "$sdk_root/cmdline-tools" -type f -path '*/bin/sdkmanager' | sort -V | tail -n1)
+          fi
+          if [[ ! -x "$sdkmanager" ]]; then
+            echo '::error::Android SDK command-line tools are missing.'
+            exit 1
+          fi
+          "$sdkmanager" --sdk_root="$sdk_root" --channel=3 "platforms;$platform"
+          test -f "$sdk_root/platforms/$platform/android.jar"
 
       - name: Stage Kotlin Multiplatform publications
         if: steps.release.outputs.tag != ''
