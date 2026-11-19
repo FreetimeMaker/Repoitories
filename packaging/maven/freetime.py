@@ -122,9 +122,11 @@ def import_release(staged, output, version):
             raise ValueError(f"unexpected staged file: {relative}")
         artifacts.setdefault(parts[2], set()).add(relative.as_posix())
 
-    expected = {
-        module + suffix for module in MODULES for suffix in ("", "-android", "-desktop")
-    }
+    roots = set(MODULES)
+    targets = {module + suffix for module in MODULES for suffix in ("-android", "-desktop")}
+    # Unified releases attach target binaries to the root Maven coordinate.
+    split = bool(targets & artifacts.keys())
+    expected = roots | targets if split else roots
     if missing := expected - artifacts.keys():
         raise ValueError(f"missing staged publications: {', '.join(sorted(missing))}")
 
@@ -138,12 +140,15 @@ def import_release(staged, output, version):
             metadata = f"{artifact}/{METADATA}"
             stem = f"{artifact}/{version}/{name}-{version}"
             binary = "aar" if name.endswith("-android") else "jar"
-            for required in (
+            required_files = (
                 metadata,
                 f"{stem}.pom",
                 f"{stem}.module",
                 f"{stem}.{binary}",
-            ):
+            )
+            if not split and name in roots:
+                required_files += (f"{stem}-android.aar", f"{stem}-desktop.jar")
+            for required in required_files:
                 if required not in files:
                     raise ValueError(f"missing staged file: {required}")
             merged, versions = merged_metadata(

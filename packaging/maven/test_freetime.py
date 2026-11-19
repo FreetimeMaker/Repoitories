@@ -7,9 +7,10 @@ from freetime import MODULES, already_published, import_release, latest_tag
 from sync import metadata_versions, xml_root
 
 
-def stage(root, version):
+def stage(root, version, unified=False):
     for module in MODULES:
-        for suffix, binary in (("", "jar"), ("-android", "aar"), ("-desktop", "jar")):
+        targets = (("", "jar"),) if unified else (("", "jar"), ("-android", "aar"), ("-desktop", "jar"))
+        for suffix, binary in targets:
             name = module + suffix
             artifact = root / "com/freetime" / name
             release = artifact / version
@@ -20,6 +21,9 @@ def stage(root, version):
                 (binary, version),
             ):
                 (release / f"{name}-{version}.{extension}").write_text(payload)
+            if unified:
+                for classifier in ("android.aar", "desktop.jar"):
+                    (release / f"{name}-{version}-{classifier}").write_text(version)
             (artifact / "maven-metadata.xml").write_text(
                 f"<metadata><groupId>com.freetime</groupId><artifactId>{name}</artifactId>"
                 f"<versioning><latest>{version}</latest><release>{version}</release>"
@@ -74,6 +78,19 @@ class FreetimeTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "refusing to overwrite"):
                 import_release(root / "4.1.0", output, "4.1.0")
             self.assertEqual((artifact / "4.1.0/Core-4.1.0.jar").read_text(), "4.1.0")
+
+    def test_unified_publication_requires_both_target_binaries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            staged, output = Path(temp) / "staged", Path(temp) / "maven"
+            stage(staged, "4.0.1", unified=True)
+            target = Path("com/freetime/Core/4.0.1/Core-4.0.1-desktop.jar")
+            (staged / target).unlink()
+            with self.assertRaisesRegex(ValueError, "missing staged file.*desktop.jar"):
+                import_release(staged, output, "4.0.1")
+            self.assertFalse(output.exists())
+            (staged / target).write_text("desktop")
+            self.assertGreater(import_release(staged, output, "4.0.1"), 0)
+            self.assertEqual((output / target).read_text(), "desktop")
 
     def test_incomplete_publication_does_not_create_repository(self):
         with tempfile.TemporaryDirectory() as temp:

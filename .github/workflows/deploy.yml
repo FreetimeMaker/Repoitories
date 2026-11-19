@@ -3,7 +3,17 @@ name: Deploy Freetime Repository
 on:
   push:
     branches: [main]
-    paths: [index.html, style.css, CNAME, apt/**, yum/**, maven/**, public.gpg, .github/workflows/deploy.yml]
+    paths:
+      [
+        index.html,
+        style.css,
+        CNAME,
+        apt/**,
+        yum/**,
+        maven/**,
+        public.gpg,
+        .github/workflows/deploy.yml,
+      ]
   workflow_run:
     workflows:
       - Update F-Droid repository
@@ -56,7 +66,13 @@ jobs:
             if git cat-file -e "HEAD:$path"; then paths+=("$path"); fi
           done
           mkdir _site
-          git archive HEAD -- "${paths[@]}" | tar -x -C _site
+          # Preserve generated F-Droid pages and assets at their original paths.
+          git archive HEAD -- "${paths[@]}" | tar -x -C _site \
+            --exclude='fdroid/repo/status' \
+            --exclude='fdroid/archive/status' \
+            --exclude='fdroid/repo/*.log.gz' \
+            --exclude='fdroid/archive/*.log.gz'
+          test -s _site/fdroid/repo/index.png
           touch _site/.nojekyll
           if [[ -n "$(find _site -type l -print -quit)" ]]; then
             echo '::error::The public package tree may not contain symlinks.'
