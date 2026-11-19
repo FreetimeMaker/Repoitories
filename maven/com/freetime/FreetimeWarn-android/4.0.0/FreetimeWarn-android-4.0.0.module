@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../FreetimeWarn/4.0.0/FreetimeWarn-4.0.0.module",
+    "group": "com.freetime",
+    "module": "FreetimeWarn",
+    "version": "4.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn.aar",
+          "url": "FreetimeWarn-android-4.0.0.aar",
+          "size": 23941,
+          "sha512": "10549a96511a81077004d29c1a35603b74359ddf57b9f21eb7564e974ed7c72b273041d725375a9bb8cf9b1d1fee58dc57192beee5521cccda465e5bffe32b2f",
+          "sha256": "b33305ee124c8d42e18ac5581d492317bb3a781a4f00abf6d6c9034b245ad987",
+          "sha1": "f1ace4f7f5b83a8b68beb62981e267d9c3da94aa",
+          "md5": "aa37575fcdb2df6ec6451034c0e0e91b"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn.aar",
+          "url": "FreetimeWarn-android-4.0.0.aar",
+          "size": 23941,
+          "sha512": "10549a96511a81077004d29c1a35603b74359ddf57b9f21eb7564e974ed7c72b273041d725375a9bb8cf9b1d1fee58dc57192beee5521cccda465e5bffe32b2f",
+          "sha256": "b33305ee124c8d42e18ac5581d492317bb3a781a4f00abf6d6c9034b245ad987",
+          "sha1": "f1ace4f7f5b83a8b68beb62981e267d9c3da94aa",
+          "md5": "aa37575fcdb2df6ec6451034c0e0e91b"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "FreetimeWarn-android-4.0.0-sources.jar",
+          "url": "FreetimeWarn-android-4.0.0-sources.jar",
+          "size": 3644,
+          "sha512": "3ffddbd58d207f8593d2bce3f465ecde2147f52657f88ee2d690e6fa52c62182fcdbe86f5f62f5a5400adfe46dfba3b6f52ad00ae0f05619466e3a097aac494f",
+          "sha256": "1d364fc73db1fcbcf38eccfdc011f24710efcff6a84a1eab4e99c34432dd1c74",
+          "sha1": "caa012a33031b4cb169e8bfc0e336e97fcf21b2b",
+          "md5": "cf23daf2a084e4b9bcc89b96e8f48dbd"
+        }
+      ]
+    }
+  ]
+}

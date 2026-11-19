@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../FreetimeWarn/4.0.0/FreetimeWarn-4.0.0.module",
+    "group": "com.freetime",
+    "module": "FreetimeWarn",
+    "version": "4.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-desktop-4.0.0.jar",
+          "url": "FreetimeWarn-desktop-4.0.0.jar",
+          "size": 24128,
+          "sha512": "d92db37857d1554cb3e45268d43d3a12751910d6a17cf72bde3711e0b434a7451cf9244311188ee9bdfccf3e6468e4811fa48acc3dc69ec67860fb597345fe65",
+          "sha256": "3e59b333b3d50814bbe177c311512ff520f95dc5a54f32161ea180693f544c6d",
+          "sha1": "fa926b8e1586b6f4cb35030e7e17735b41685ef8",
+          "md5": "c1acd34c81b8c44fbd932b3770a8e43d"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.10.3"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-desktop-4.0.0.jar",
+          "url": "FreetimeWarn-desktop-4.0.0.jar",
+          "size": 24128,
+          "sha512": "d92db37857d1554cb3e45268d43d3a12751910d6a17cf72bde3711e0b434a7451cf9244311188ee9bdfccf3e6468e4811fa48acc3dc69ec67860fb597345fe65",
+          "sha256": "3e59b333b3d50814bbe177c311512ff520f95dc5a54f32161ea180693f544c6d",
+          "sha1": "fa926b8e1586b6f4cb35030e7e17735b41685ef8",
+          "md5": "c1acd34c81b8c44fbd932b3770a8e43d"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "FreetimeWarn-desktop-4.0.0-sources.jar",
+          "url": "FreetimeWarn-desktop-4.0.0-sources.jar",
+          "size": 3593,
+          "sha512": "63f22a2aa137a9d54e1fbb023d03fc340fb80d09972aa04641c612078bd705274dda3d009e304ff4097c4872f1964722bfdde5048c16d6976e273c759388ffd8",
+          "sha256": "dacb51aef2538ec0e16aa769d5beb22bd801a47c08af84ceb5aaacf48acfe52a",
+          "sha1": "d6a0e0ea57464f5591b7d163209db9ca7d409c53",
+          "md5": "0b90c70e1c6049ec2b409b87d2dff5f5"
+        }
+      ]
+    }
+  ]
+}
