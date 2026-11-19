@@ -44,3 +44,9 @@ pre {
   border-radius: 0.5rem;
   white-space: pre-wrap;
 }
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
