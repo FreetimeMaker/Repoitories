@@ -11,16 +11,3 @@ SHA1: 3ae7210c576304445381382b508891825411ec24
 SHA256: ddbb125d9352cf17852c3ccec98dd2532887acbe91cdf0fc9068ebfc10f28102
 Description: GUI for XMRig crypto miner
 
-Package: fury-cli
-Source: fury-cli
-Version: 1.0.0
-Architecture: amd64
-Maintainer: Freetime Maker <FreetimeMaker@proton.me>
-Depends: libc6 (>= 2.34), ca-certificates
-Filename: pool/main/fury-cli_1.0.0_amd64.deb
-Size: 7780768
-MD5sum: 779a14b4c716995e074150f6fb911a3a
-SHA1: 581701fc248960f933f9f4b5b0b63b5b4b3b1707
-SHA256: 23a95ad7366bd95c7c27b81ca5dfa0a7146aca7a5ac8ea6365b7ff56a9098173
-Description: Command-line interface for Gemfury
-
