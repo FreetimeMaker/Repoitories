@@ -1,0 +1,52 @@
+name: Update APT repository
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/apt-update.yml"
+      - "packaging/linux/**"
+  schedule:
+    - cron: "22 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apt-repository-main
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Resolve and fetch packages
+        id: packages
+        env:
+          LINUX_GPG_FINGERPRINT: ${{ vars.LINUX_GPG_FINGERPRINT }}
+        run: python3 packaging/linux/fetch.py apt "$RUNNER_TEMP/linux-repo"
+
+      - name: Install repository tools
+        if: steps.packages.outputs.ready == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-utils dpkg-dev gnupg rsync
+
+      - name: Build and sign repository
+        if: steps.packages.outputs.ready == 'true'
+        env:
+          LINUX_GPG_PRIVATE_KEY: ${{ secrets.LINUX_GPG_PRIVATE_KEY }}
+          LINUX_GPG_PASSPHRASE: ${{ secrets.LINUX_GPG_PASSPHRASE }}
+          LINUX_GPG_FINGERPRINT: ${{ vars.LINUX_GPG_FINGERPRINT }}
+        run: bash packaging/linux/sign.sh apt "$RUNNER_TEMP/linux-repo"
+
+      - name: Publish to main
+        if: steps.packages.outputs.ready == 'true'
+        run: bash packaging/linux/publish.sh apt "$RUNNER_TEMP/linux-repo"

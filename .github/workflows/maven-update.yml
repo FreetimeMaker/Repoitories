@@ -1,0 +1,137 @@
+name: Update Maven repository
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/maven-update.yml"
+      - "packaging/maven/**"
+  schedule:
+    - cron: "52 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: maven-update-main
+  cancel-in-progress: false
+
+jobs:
+  # Only this read-only job checks out and executes upstream code.
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Select latest stable Freetime-Core tag
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git ls-remote --tags https://github.com/FreetimeMaker/Freetime-Core.git \
+            | python3 packaging/maven/freetime.py select >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        if: steps.release.outputs.tag != ''
+        with:
+          repository: FreetimeMaker/Freetime-Core
+          ref: ${{ steps.release.outputs.commit }}
+          path: freetime-core
+          persist-credentials: false
+
+      # Match upstream .github/workflows/build.yml at v4.0.0.
+      - uses: actions/setup-java@v6
+        if: steps.release.outputs.tag != ''
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Install Android compile SDK from the tagged catalog
+        if: steps.release.outputs.tag != ''
+        working-directory: freetime-core
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk=$(python3 -c 'import tomllib; print(tomllib.load(open("gradle/libs.versions.toml", "rb"))["versions"]["compileSdk"])')
+          [[ "$sdk" =~ ^[0-9]+$ ]] || { echo 'Invalid compileSdk'; exit 1; }
+          # API 37 and later use a major.minor platform package name.
+          platform="android-$sdk"
+          if (( sdk >= 37 )); then
+            platform+=.0
+          fi
+          sdkmanager "platforms;$platform"
+          test -f "$ANDROID_HOME/platforms/$platform/android.jar"
+
+      - name: Stage Kotlin Multiplatform publications
+        if: steps.release.outputs.tag != ''
+        working-directory: freetime-core
+        shell: bash
+        env:
+          TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          set -euo pipefail
+          bash ./gradlew --no-daemon stagePublications -PreleaseVersion="${TAG#v}"
+
+      - uses: actions/upload-artifact@v4
+        if: steps.release.outputs.tag != ''
+        with:
+          name: freetime-core-maven
+          path: freetime-core/build/public-maven/
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    # Keep manifest sync running even if upstream discovery or compilation fails.
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Sync Maven files
+        run: python3 packaging/maven/sync.py
+
+      - uses: actions/download-artifact@v4
+        if: needs.build.result == 'success' && needs.build.outputs.tag != ''
+        with:
+          name: freetime-core-maven
+          path: ${{ runner.temp }}/freetime-core-maven
+
+      - name: Import staged Maven files
+        if: needs.build.result == 'success' && needs.build.outputs.tag != ''
+        shell: bash
+        env:
+          TAG: ${{ needs.build.outputs.tag }}
+        run: python3 packaging/maven/freetime.py publish "$TAG" "$RUNNER_TEMP/freetime-core-maven"
+
+      - name: Commit and push Maven updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          paths=()
+          [[ ! -d maven ]] || paths+=(maven/)
+          state=packaging/maven/freetime-core.tag
+          [[ ! -f "$state" ]] || paths+=("$state")
+          if (( ${#paths[@]} == 0 )); then
+            exit 0
+          fi
+          git add -- "${paths[@]}"
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'Update Maven repository' -- "${paths[@]}"
+          git push origin HEAD:refs/heads/main

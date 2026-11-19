@@ -1,0 +1,75 @@
+name: Deploy Freetime Repository
+
+on:
+  push:
+    branches: [main]
+    paths: [index.html, style.css, CNAME, apt/**, yum/**, maven/**, public.gpg, .github/workflows/deploy.yml]
+  workflow_run:
+    workflows:
+      - Update F-Droid repository
+      - Update APT repository
+      - Update YUM repository
+      - Update Maven repository
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_repository.full_name == github.repository))
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Assemble and validate package repositories
+        shell: bash
+        run: |
+          set -euo pipefail
+          for section in repo archive; do
+            jq -e --arg url "https://repo.free-time.me/fdroid/$section" \
+              '.repo.address == $url' "fdroid/$section/index-v2.json" >/dev/null || {
+                echo '::error::Run the F-Droid update first to regenerate and sign indexes for the new domain.'
+                exit 1
+              }
+            test -s "fdroid/$section/entry.jar"
+          done
+          paths=(index.html style.css CNAME fdroid/repo fdroid/archive)
+          for path in apt yum maven public.gpg; do
+            if git cat-file -e "HEAD:$path"; then paths+=("$path"); fi
+          done
+          mkdir _site
+          git archive HEAD -- "${paths[@]}" | tar -x -C _site
+          touch _site/.nojekyll
+          if [[ -n "$(find _site -type l -print -quit)" ]]; then
+            echo '::error::The public package tree may not contain symlinks.'
+            exit 1
+          fi
+          if (( $(du -sb _site | cut -f1) > 1000000000 )); then
+            echo '::error::The package tree exceeds the 1 GB GitHub Pages site limit.'
+            exit 1
+          fi
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

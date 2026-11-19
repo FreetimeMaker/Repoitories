@@ -1,56 +1,61 @@
-<!-- auto-generated - fdroid index updates will overwrite this file -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width; initial-scale=1.0; minimum-scale=0.5; maximum-scale=2.0; user-scalable=1;" name="viewport">
-    <title>
-   Freetime Repository
-    </title>
-    <base href="index.html">
-    <link href="repo/index.css" rel="stylesheet" type="text/css">
-    <link href="repo/icons/icon.png" rel="icon" type="image/png">
-    <link href="repo/icons/icon.png" rel="shortcut icon" type="image/png">
-    <meta content="Freetime Repository" property="og:site_name">
-    <meta content="Freetime Repository" property="og:title">
-    <meta content property="og:determiner">
-    <meta content="This is the Official F-Droid Repository from Freetime Maker for F-Droid. It includes Apps from Freetime Maker and others. It gets Updates from Freetime Maker directly and faster than the Official F-Droid Repository from F-Droid and includes Apps that aren't in the F-Droid Repository yet." property="og:description">
-    <meta content="index,nofollow" name="robots">
-  </head>
-  <body>
-    <h2>
-      Freetime Repository
-    </h2>
-    <div id="intro">
-      <p style="margin-bottom:.2em;">
-        <span style="float:right;width:100px;margin-left:.5em;">
-          <a href="repo/index.png" title="QR: test">
-            <img alt="QR: test" src="repo/index.png" width="100">
-          </a>
-        </span>
-        This is the Official F-Droid Repository from Freetime Maker for F-Droid. It includes Apps from Freetime Maker and others. It gets Updates from Freetime Maker directly and faster than the Official F-Droid Repository from F-Droid and includes Apps that aren't in the F-Droid Repository yet.
-        <br>
-        <br>
-        Currently it serves
-        <kbd>
-          3
-        </kbd>
-        apps. To add it to your F-Droid app, scan the QR code (click it to enlarge) or use this link:
-      </p>
-      <p class="center" style="margin-top:.5em">
-        <a href="https://fdroid.link/#https://fdroid.free-time.me/repo?fingerprint=525AAD9B346F70388D96E281C061BC184B5AFEC35872BF1E140AD8063CC2A1C2">
-          <code style="color:#000000;font-weight:bold;">
-            https://fdroid.free-time.me/repo
-          </code>
-        </a>
-      </p>
-      <p>
-        If you would like to manually verify the fingerprint (SHA-256) of the repository signing key, here it is:
-        <br>
-        <blockcode style="color:#000000;font-weight:bold;">
-          52 5A AD 9B 34 6F 70 38 8D 96 E2 81 C0 61 BC 18 4B 5A FE C3 58 72 BF 1E 14 0A D8 06 3C C2 A1 C2
-        </blockcode>
-      </p>
-    </div>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freetime Repository</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <p>repo.free-time.me</p>
+    <h1>Freetime Repository</h1>
+    <p>Package sources for Android, Linux, Java and Kotlin.</p>
+    <nav aria-label="Package sources">
+      <a href="#fdroid">F-Droid</a>
+      <a href="#apt">APT</a>
+      <a href="#yum">YUM / DNF</a>
+      <a href="#maven">Maven / Gradle</a>
+    </nav>
+  </header>
+  <main>
+    <section id="fdroid">
+      <h2>F-Droid</h2>
+      <p>Scan the QR code or open the link to add the repository to your Android client.</p>
+      <p><a href="https://fdroid.link/#https://repo.free-time.me/fdroid/repo?fingerprint=525AAD9B346F70388D96E281C061BC184B5AFEC35872BF1E140AD8063CC2A1C2">Add to F-Droid</a></p>
+      <a href="fdroid/repo/index.png"><img src="fdroid/repo/index.png" alt="QR code for the Freetime F-Droid repository" width="120" height="120"></a>
+      <p>Repository URL: <code>https://repo.free-time.me/fdroid/repo</code></p>
+      <details>
+        <summary>Signing fingerprint (SHA-256)</summary>
+        <code>525AAD9B346F70388D96E281C061BC184B5AFEC35872BF1E140AD8063CC2A1C2</code>
+      </details>
+    </section>
+    <section id="apt">
+      <h2>APT</h2>
+      <p>Debian and Ubuntu · amd64 · stable main</p>
+      <p>After verifying the repository key and installing it as <code>/etc/apt/keyrings/freetime-repository.gpg</code>, add this entry to your APT sources:</p>
+      <pre><code>deb [arch=amd64 signed-by=/etc/apt/keyrings/freetime-repository.gpg] https://repo.free-time.me/apt stable main</code></pre>
+    </section>
+    <section id="yum">
+      <h2>YUM / DNF</h2>
+      <p>Fedora and RHEL · x86_64</p>
+      <p>Save this configuration as <code>/etc/yum.repos.d/freetime-repository.repo</code> and verify the key fingerprint before accepting it:</p>
+      <pre><code>[Freetime Repository]
+name=Freetime Repository
+baseurl=https://repo.free-time.me/yum/x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
+    </section>
+    <section id="maven">
+      <h2>Maven / Gradle</h2>
+      <p>Libraries for Java and Kotlin. Add the following repository in your Gradle Kotlin DSL configuration:</p>
+      <pre><code>repositories {
+    maven { url = uri("https://repo.free-time.me/maven") }
+}</code></pre>
+    </section>
+  </main>
+  <footer><p>APT, YUM and Maven endpoints become available when their first packages are published.</p></footer>
+</body>
 </html>
