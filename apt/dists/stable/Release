@@ -1,0 +1,19 @@
+Architectures: amd64
+Codename: stable
+Components: main
+Date: Thu, 19 Nov 2026 12:52:09 +0000
+Label: Freetime
+Origin: Freetime
+Suite: stable
+MD5Sum:
+ dbd61aec5e8a0ce1f8ad49d1e4e2efa7              868 main/binary-amd64/Packages
+ 72efcde69997a4fade4f07075420b8fc              514 main/binary-amd64/Packages.gz
+SHA1:
+ d46dfba02f769e281a22c8c6c06d8e4025d0e988              868 main/binary-amd64/Packages
+ 638b9fa77a5d91c8f98f90fad5b5e4b0807acebc              514 main/binary-amd64/Packages.gz
+SHA256:
+ 10862967dbdfc24bfcea89688ef11e9918abe7c6066858eb36fc865934046a74              868 main/binary-amd64/Packages
+ 08b3d00b72229959be7058bc6ceab920dee72f26b06528754863e51ad4ded11c              514 main/binary-amd64/Packages.gz
+SHA512:
+ 9461d60055636054d501e9b82625871adc42c63a206cbbdf6611d5cf5b96b9ef2ddf930b9c0c84aef6cca41b3541378316263152dac4e6b3e0e2d2c4d47d020c              868 main/binary-amd64/Packages
+ a3e1078496a2435016512240bcfec4dc1259fb94eea12c38727ef9e8c87940a68aadadb79395b6ac3f0dd75a528e7918f68b39d11d55699fd9ed71dd61efdcec              514 main/binary-amd64/Packages.gz
