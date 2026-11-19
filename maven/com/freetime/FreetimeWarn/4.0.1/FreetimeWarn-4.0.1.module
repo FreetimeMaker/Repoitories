@@ -1,0 +1,291 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.freetime",
+    "module": "FreetimeWarn",
+    "version": "4.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1.jar",
+          "url": "FreetimeWarn-4.0.1.jar",
+          "size": 730,
+          "sha512": "08c2ed980d81eb1819e169c772604e8cb8f5e6ecc1d8085aedbddf4b88dfddb15c882d92b5f98dde6d1c9fb6880371b844f402ec36d617a24ca02f0177cebfb1",
+          "sha256": "4b8d4a2d30595a1f1d11a584a4aaef586350ae22266a35d833b7528279e93b6d",
+          "sha1": "b4e699a4924dfd4a53618b519f540383f84c1b0b",
+          "md5": "f377e84709b6a7d532ef7ca4141cd5fe"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-sources.jar",
+          "url": "FreetimeWarn-4.0.1-sources.jar",
+          "size": 2424,
+          "sha512": "2dd44f773c5c7c19022a8a6e899f1a43eeeeb906be20ed05f5704a8f60b88bbe0ebffc96871e232d20509952b335f9699bf8f21899aa36a886b96c53053b8296",
+          "sha256": "3ca7f98eff2933d1d6abca3d24f3545b05a85a6a8cf5e338043c6449cf058cd5",
+          "sha1": "1dc57357b0a1e2b2a3b339c95e1efee64e3f2abf",
+          "md5": "b14c251ea7178752e5d8b02f9e1a8d21"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-android.aar",
+          "url": "FreetimeWarn-4.0.1-android.aar",
+          "size": 23909,
+          "sha512": "b7c7b4eb1fa35365d3fb45d7921259bd9d763ec34ffb9d8e1f7b05dcff2dad2cd8b61cb5640c34ab1333b9feddcd64a25ad2128e83b7b1b6c3f805a2d88d6043",
+          "sha256": "487136cf39af36cc2012af79ed3957beaba58968ad8edc654af6cc7a539cbdc6",
+          "sha1": "591e9253649684cb7045b1cf8c09e522ee83ebd7",
+          "md5": "f682ad78b04aa28f4661ae056f9e98eb"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-android.aar",
+          "url": "FreetimeWarn-4.0.1-android.aar",
+          "size": 23909,
+          "sha512": "b7c7b4eb1fa35365d3fb45d7921259bd9d763ec34ffb9d8e1f7b05dcff2dad2cd8b61cb5640c34ab1333b9feddcd64a25ad2128e83b7b1b6c3f805a2d88d6043",
+          "sha256": "487136cf39af36cc2012af79ed3957beaba58968ad8edc654af6cc7a539cbdc6",
+          "sha1": "591e9253649684cb7045b1cf8c09e522ee83ebd7",
+          "md5": "f682ad78b04aa28f4661ae056f9e98eb"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-android-sources.jar",
+          "url": "FreetimeWarn-4.0.1-android-sources.jar",
+          "size": 3644,
+          "sha512": "3ffddbd58d207f8593d2bce3f465ecde2147f52657f88ee2d690e6fa52c62182fcdbe86f5f62f5a5400adfe46dfba3b6f52ad00ae0f05619466e3a097aac494f",
+          "sha256": "1d364fc73db1fcbcf38eccfdc011f24710efcff6a84a1eab4e99c34432dd1c74",
+          "sha1": "caa012a33031b4cb169e8bfc0e336e97fcf21b2b",
+          "md5": "cf23daf2a084e4b9bcc89b96e8f48dbd"
+        }
+      ]
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-desktop.jar",
+          "url": "FreetimeWarn-4.0.1-desktop.jar",
+          "size": 24091,
+          "sha512": "34b708ea98bb89b53f294e81f38df352c6c8b05c5ad8f10393f6f2514ac4337a08cd54dca5dcb71413dd0314b936381ac967a189450242b8ee36cc2ebaef8075",
+          "sha256": "d99a8da77f2bbea95ddbdd0feb9d78654d438b4328e94f08d6974d7a75abf00b",
+          "sha1": "e8678e5ffa0237d8f9ad04bc7c8d0f82a2308f40",
+          "md5": "b66572aa1e8008870ae83f1c5f0c2527"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-desktop.jar",
+          "url": "FreetimeWarn-4.0.1-desktop.jar",
+          "size": 24091,
+          "sha512": "34b708ea98bb89b53f294e81f38df352c6c8b05c5ad8f10393f6f2514ac4337a08cd54dca5dcb71413dd0314b936381ac967a189450242b8ee36cc2ebaef8075",
+          "sha256": "d99a8da77f2bbea95ddbdd0feb9d78654d438b4328e94f08d6974d7a75abf00b",
+          "sha1": "e8678e5ffa0237d8f9ad04bc7c8d0f82a2308f40",
+          "md5": "b66572aa1e8008870ae83f1c5f0c2527"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "FreetimeWarn-4.0.1-desktop-sources.jar",
+          "url": "FreetimeWarn-4.0.1-desktop-sources.jar",
+          "size": 3593,
+          "sha512": "63f22a2aa137a9d54e1fbb023d03fc340fb80d09972aa04641c612078bd705274dda3d009e304ff4097c4872f1964722bfdde5048c16d6976e273c759388ffd8",
+          "sha256": "dacb51aef2538ec0e16aa769d5beb22bd801a47c08af84ceb5aaacf48acfe52a",
+          "sha1": "d6a0e0ea57464f5591b7d163209db9ca7d409c53",
+          "md5": "0b90c70e1c6049ec2b409b87d2dff5f5"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.freetime",
+    "module": "Notifications",
+    "version": "4.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Notifications-4.0.1.jar",
+          "url": "Notifications-4.0.1.jar",
+          "size": 742,
+          "sha512": "f5cef127fe564a87ade67ecc08234af5e1d2e9c752250be0c344c5eb0e1989dfb5dc05cdc3ba894844699af04218d370be5eace11bb50bdfffd194e3d946eced",
+          "sha256": "776e2bd3091b86d8ce1d2bb8475c7062f32e193a8607f9b919e514247480be19",
+          "sha1": "78335647bb5b5725ce971d8d6cd11f809647811e",
+          "md5": "248ee84a8d809934bfdbe162b6bbf366"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "Notifications-4.0.1-sources.jar",
+          "url": "Notifications-4.0.1-sources.jar",
+          "size": 14359,
+          "sha512": "df4422902c092e24e77a17fea73c04835932dfe08179cbe7dbc701b08d9c04b93c152dc4f9a96014fca1f0886774f139cbc540ad61d8b3aef71749dba5260993",
+          "sha256": "f4eff071d86c61ff43eca2b8d092a6d3439bd410a466c6399c74fa49f079f746",
+          "sha1": "08afae7138d49b9185034cae407dd3e10e483058",
+          "md5": "1f7bf05c74cec4076869dbca074ebeca"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Notifications-4.0.1-android.aar",
+          "url": "Notifications-4.0.1-android.aar",
+          "size": 136006,
+          "sha512": "322c3a72488d66eb35f171a8cb85a149d477ffc1629e911f1ff20c56b35fdf49cc26b88be07c404f4f723775fc7b83b2ad54ad7e637090a57e0ed18ca874c196",
+          "sha256": "1ec03412fbe731bf773b60321377a51434ddae0a62c128ec25b64586dca8c576",
+          "sha1": "9ccbbe3313f3a0535ce13fec84b1d66afdd00608",
+          "md5": "005e6c7b82e76fb04fa3fe642868cd5a"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.19.1"
+          }
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime-ktx",
+          "version": {
+            "requires": "2.12.0"
+          }
+        },
+        {
+          "group": "androidx.datastore",
+          "module": "datastore-preferences",
+          "version": {
+            "requires": "1.3.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Notifications-4.0.1-android.aar",
+          "url": "Notifications-4.0.1-android.aar",
+          "size": 136006,
+          "sha512": "322c3a72488d66eb35f171a8cb85a149d477ffc1629e911f1ff20c56b35fdf49cc26b88be07c404f4f723775fc7b83b2ad54ad7e637090a57e0ed18ca874c196",
+          "sha256": "1ec03412fbe731bf773b60321377a51434ddae0a62c128ec25b64586dca8c576",
+          "sha1": "9ccbbe3313f3a0535ce13fec84b1d66afdd00608",
+          "md5": "005e6c7b82e76fb04fa3fe642868cd5a"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "Notifications-4.0.1-android-sources.jar",
+          "url": "Notifications-4.0.1-android-sources.jar",
+          "size": 21034,
+          "sha512": "ace6aaf9d0c17531c57a0c77c063c3f7d9a2e79d30988f5186915bb7c07b517d66406bcb3c25224643edb235f6073f8da7ee8abe8aaeddb9c69a93127eb260ce",
+          "sha256": "ae48ab31dea4582fc511eafa089f01e0bceabed2e8dd6462eaf2dded51a56a37",
+          "sha1": "00bff3da719836cb2042bbaf3ba14d974bef29a8",
+          "md5": "4491d7023c64720e9a7903b6c89be4ec"
+        }
+      ]
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Notifications-4.0.1-desktop.jar",
+          "url": "Notifications-4.0.1-desktop.jar",
+          "size": 129891,
+          "sha512": "e56564e5eaf97942b9cf019013b155758c7405f04a96b4525f61d531aad88bfa2e515cd3d3ca187b9e294c6df1f3af0734bc6fa9c2c48be521fd59488b5483ad",
+          "sha256": "62a9e99a279ce1a497faa2fd917a48386df400b328f7f08c8317290bac28c74b",
+          "sha1": "ba353661da1da8f30d071e8b1bb72e188cdba01c",
+          "md5": "b67e3cf0b94a0855ea8725059d301e34"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.json",
+          "module": "json",
+          "version": {
+            "requires": "20240303"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.11.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Notifications-4.0.1-desktop.jar",
+          "url": "Notifications-4.0.1-desktop.jar",
+          "size": 129891,
+          "sha512": "e56564e5eaf97942b9cf019013b155758c7405f04a96b4525f61d531aad88bfa2e515cd3d3ca187b9e294c6df1f3af0734bc6fa9c2c48be521fd59488b5483ad",
+          "sha256": "62a9e99a279ce1a497faa2fd917a48386df400b328f7f08c8317290bac28c74b",
+          "sha1": "ba353661da1da8f30d071e8b1bb72e188cdba01c",
+          "md5": "b67e3cf0b94a0855ea8725059d301e34"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "Notifications-4.0.1-desktop-sources.jar",
+          "url": "Notifications-4.0.1-desktop-sources.jar",
+          "size": 18870,
+          "sha512": "39650b1a22c2fbe206f335e6a37a18aa6e7d9895bab5741174da7b311905b8171098b8931c082fe04db20b923650efb4d9b1acd74177af2749e87135814b0ccd",
+          "sha256": "6b38f6521338a150ae60bad396b48b01eb1dc8560f25c149f0e145c3f789645d",
+          "sha1": "3eae678bc331fe7b247cec69b291a0e38568bb02",
+          "md5": "3886849c75f62821ed73293d97e7053e"
+        }
+      ]
+    }
+  ]
+}

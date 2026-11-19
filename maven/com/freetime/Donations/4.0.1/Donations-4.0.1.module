@@ -1,0 +1,361 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.freetime",
+    "module": "Donations",
+    "version": "4.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Browser",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Donations-4.0.1.jar",
+          "url": "Donations-4.0.1.jar",
+          "size": 742,
+          "sha512": "e026cfaacb2196be8504e9d82898d0fd5812b225d432532ad4a47297d6f76725a3161ab57be2cd2faa0446b2d1f59d77a34ff10fd05fcd84030e5fbb2365bc06",
+          "sha256": "6632cde0e2def197ecab45c731915b263b41c7cbdb07253e6f685fe29a35aac4",
+          "sha1": "ee93d70648de3204718a508a6d19b93a5a502889",
+          "md5": "7e1cbb6bc29e2b4fce007266b765696d"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "Donations-4.0.1-sources.jar",
+          "url": "Donations-4.0.1-sources.jar",
+          "size": 2867,
+          "sha512": "7850dbff0fb711c4297991ce3d2a597eaed78d4351da6429bb591e171c30669a80c388d6984424bdc2cb20cba1c5d500602bef827565b255c30bd94088ea5d22",
+          "sha256": "2adc1db4075f116f96828792edc802c733f47ae95eaea6f68436674361642f69",
+          "sha1": "595d1b5cec112ffa0319aba0684a3f4506d615ee",
+          "md5": "8c1e45b44b5213f4f454ae23f2ae9c1b"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Browser",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Donations-4.0.1-android.aar",
+          "url": "Donations-4.0.1-android.aar",
+          "size": 43406,
+          "sha512": "70e1dbb6bc5995369a93d6a03ade50b8a2b2cb3507e28ccbc48992b57a4f998b9e54191e5730fd4760b375b0c049c4e7b12ff106832204dad26439e7a8b4b9fc",
+          "sha256": "aa1e3f0a1a3c6ce3d52fbf10bf5e54eb882a3d5feda7e7a250c3b5fa29be5726",
+          "sha1": "a7258f5d661f85b894928281341ce7696b66bd23",
+          "md5": "91701d3997c23e9894465ec276e8a223"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Browser",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Donations-4.0.1-android.aar",
+          "url": "Donations-4.0.1-android.aar",
+          "size": 43406,
+          "sha512": "70e1dbb6bc5995369a93d6a03ade50b8a2b2cb3507e28ccbc48992b57a4f998b9e54191e5730fd4760b375b0c049c4e7b12ff106832204dad26439e7a8b4b9fc",
+          "sha256": "aa1e3f0a1a3c6ce3d52fbf10bf5e54eb882a3d5feda7e7a250c3b5fa29be5726",
+          "sha1": "a7258f5d661f85b894928281341ce7696b66bd23",
+          "md5": "91701d3997c23e9894465ec276e8a223"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "Donations-4.0.1-android-sources.jar",
+          "url": "Donations-4.0.1-android-sources.jar",
+          "size": 4140,
+          "sha512": "34516f07a8013e0a690c8aa845543ab239c4cc88458a66bf474402e2109be01d7f8824539f2e3c9a92f8927f46e4236f9874901e92d3aaf6cb864a6a9c9b68d8",
+          "sha256": "ae7d0b5fd100d938f8fa1387eea46771c27f20cdb93eb3d678ff2772213fb38b",
+          "sha1": "899b52ff20532d734955264770e34007203e529d",
+          "md5": "bffda8f61a13644d5a5715b319743f18"
+        }
+      ]
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Browser",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Donations-4.0.1-desktop.jar",
+          "url": "Donations-4.0.1-desktop.jar",
+          "size": 47746,
+          "sha512": "38be03921c121ec2c0efce18f2d72ff2535f7f3dcbfb6bbcb84a43758f9d2ecd48807aafd4eca31989dbc45cb8152a14549c2caad3821dc1e8eab689d3ffa351",
+          "sha256": "5c822ab894bb04fa45ab09a579aa34bbef782566b3e47e9149130465ab42fe89",
+          "sha1": "e0923fc8495440bae410252f0def0e07df131f1b",
+          "md5": "38775ceacbe4790ccd382a901a075cf9"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Browser",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Donations-4.0.1-desktop.jar",
+          "url": "Donations-4.0.1-desktop.jar",
+          "size": 47746,
+          "sha512": "38be03921c121ec2c0efce18f2d72ff2535f7f3dcbfb6bbcb84a43758f9d2ecd48807aafd4eca31989dbc45cb8152a14549c2caad3821dc1e8eab689d3ffa351",
+          "sha256": "5c822ab894bb04fa45ab09a579aa34bbef782566b3e47e9149130465ab42fe89",
+          "sha1": "e0923fc8495440bae410252f0def0e07df131f1b",
+          "md5": "38775ceacbe4790ccd382a901a075cf9"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "Donations-4.0.1-desktop-sources.jar",
+          "url": "Donations-4.0.1-desktop-sources.jar",
+          "size": 3996,
+          "sha512": "c6779fd98546012004ca62195d95752cc39373161aff02151ad4d6475a99ec788b40644a7c54624cfb2029116e0d22ef03ce9240d7abb1e9ebcfa190aac0041e",
+          "sha256": "971a2d2db6d43bd03e021b80304e68d87c1d4eefdced4f59e7a7053bcb9bc169",
+          "sha1": "7364eae93983035eb9b222c1a2f8451c4e508b7c",
+          "md5": "16d34dfdb0c0ceb2d34a244d4290ad78"
+        }
+      ]
+    }
+  ]
+}
