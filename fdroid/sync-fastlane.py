@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh store listings from GitHub's default branch, independently of releases."""
+"""Refresh store listings from the selected F-Droid build reference."""
 
 import base64
 import json
@@ -7,6 +7,9 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import quote, urlencode
+
+import yaml
 
 TEXT_FILES = {"title.txt", "short_description.txt", "full_description.txt", "video.txt"}
 IMAGE_DIRS = {
@@ -26,8 +29,8 @@ def api(endpoint):
     )
 
 
-def entries(repo, path):
-    result = api(f"repos/{repo}/contents/{path}")
+def entries(repo, path, ref):
+    result = api(f"repos/{repo}/contents/{quote(path)}?{urlencode({'ref': ref})}")
     if not isinstance(result, list):
         raise ValueError(f"Expected directory: {path}")
     for entry in result:
@@ -44,8 +47,8 @@ def download(repo, entry):
     return base64.b64decode(data["content"])
 
 
-def sync(repo, app):
-    locales = entries(repo, "fastlane/metadata/android")
+def sync(repo, app, ref):
+    locales = entries(repo, "fastlane/metadata/android", ref)
     for locale in locales:
         if locale["type"] != "dir":
             continue
@@ -53,11 +56,11 @@ def sync(repo, app):
         pending = {}
         screenshot_dirs = []
         try:
-            for entry in entries(repo, locale["path"]):
+            for entry in entries(repo, locale["path"], ref):
                 if entry["type"] == "file" and entry["name"] in TEXT_FILES:
                     pending[Path(entry["name"])] = download(repo, entry)
                 elif entry["type"] == "dir" and entry["name"] == "images":
-                    for image in entries(repo, entry["path"]):
+                    for image in entries(repo, entry["path"], ref):
                         name = Path(image["name"])
                         if (
                             image["type"] == "file"
@@ -68,7 +71,7 @@ def sync(repo, app):
                         elif image["type"] == "dir" and image["name"] in IMAGE_DIRS:
                             directory = Path("images") / name
                             screenshot_dirs.append(directory)
-                            for screenshot in entries(repo, image["path"]):
+                            for screenshot in entries(repo, image["path"], ref):
                                 if (
                                     screenshot["type"] == "file"
                                     and Path(screenshot["name"]).suffix.lower()
@@ -99,10 +102,28 @@ def sync(repo, app):
                         and directory / old.name not in pending
                     ):
                         old.unlink()
-        print(f"Synced {app}/{locale['name']}: {len(pending)} files")
+        print(f"Synced {app}@{ref}/{locale['name']}: {len(pending)} files")
+
+
+def build_ref(metadata):
+    data = yaml.safe_load(metadata.read_text())
+    version = data.get("CurrentVersionCode")
+    if version is not None:
+        for build in data.get("Builds", []):
+            if str(build.get("versionCode")) == str(version) and not build.get("disable"):
+                ref = build.get("commit")
+                if isinstance(ref, str) and ref.strip():
+                    return ref
+    raise ValueError(f"No build reference for CurrentVersionCode {version}")
 
 
 def main():
+    if len(sys.argv) == 3 and sys.argv[1] == "--build-ref":
+        try:
+            print(quote(build_ref(Path(sys.argv[2])), safe=""))
+        except (OSError, ValueError, yaml.YAMLError) as error:
+            sys.exit(str(error))
+        return
     target = sys.argv[1] if len(sys.argv) > 1 else None
     for metadata in sorted(Path("metadata").glob("*.yml")):
         if target and metadata.stem != target:
@@ -116,8 +137,8 @@ def main():
             continue
         repo = match[1].removesuffix(".git")
         try:
-            sync(repo, metadata.stem)
-        except (subprocess.CalledProcessError, ValueError, KeyError) as error:
+            sync(repo, metadata.stem, build_ref(metadata))
+        except (subprocess.CalledProcessError, ValueError, KeyError, yaml.YAMLError) as error:
             print(
                 f"Warning: keeping local listings for {metadata.stem}: {error}",
                 file=sys.stderr,

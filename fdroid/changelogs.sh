@@ -108,29 +108,14 @@ for METADATA_FILE in "${METADATA_FILES[@]}"; do
     echo "    Repository: $GITHUB_REPO"
     echo "    Searching Fastlane changelog..."
 
-    # Upstream can correct metadata after a release without moving its tag.
-    CHANGELOG="$(github_raw_content "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt" || true)"
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt" || true)"
+    CHANGELOG=""
+    if BUILD_REF="$(python3 ./sync-fastlane.py --build-ref "$METADATA_FILE")"; then
+        FASTLANE_PATH="repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs"
+        CHANGELOG="$(github_raw_content "$FASTLANE_PATH/$VERSION_CODE.txt?ref=$BUILD_REF" || true)"
+        if [ -z "$CHANGELOG" ]; then
+            CHANGELOG="$(github_raw_content "$FASTLANE_PATH/default.txt?ref=$BUILD_REF" || true)"
+        fi
     fi
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt?ref=v$VERSION"             || true)"
-    fi
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt?ref=v$VERSION"             || true)"
-    fi
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/$VERSION_CODE.txt?ref=$VERSION"             || true)"
-    fi
-
-    if [ -z "$CHANGELOG" ]; then
-        CHANGELOG="$(github_raw_content             "repos/$GITHUB_REPO/contents/fastlane/metadata/android/$LOCALE/changelogs/default.txt?ref=$VERSION"             || true)"
-    fi
-
 
     if [ -z "$CHANGELOG" ]; then
         echo "    Fastlane changelog not found."

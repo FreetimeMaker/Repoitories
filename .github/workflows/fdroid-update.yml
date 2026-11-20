@@ -184,6 +184,9 @@ jobs:
           pattern: update-result-*
           path: fdroid/update-results
 
+      - name: Install metadata parser
+        run: python3 -m pip install PyYAML
+
       - name: Apply metadata, changelog and README updates
         id: apply
         shell: bash
@@ -227,7 +230,7 @@ jobs:
           PY
             UPDATED_COUNT=$((UPDATED_COUNT + 1))
           done < <(find update-results -type f -name result.json | sort)
-          # Refresh upstream corrections even when no new app version was released.
+          # Refresh listings and release notes for the selected builds.
           bash ./changelogs.sh
           python3 ./sync-fastlane.py
           if [ "$UPDATED_COUNT" -eq 0 ] && [ -z "$(git status --porcelain -- metadata)" ]; then
