@@ -413,26 +413,45 @@ jobs:
           marker = '                            if compare_result:\n                                if options.test:'
           if source.count(marker) != 1:
               raise SystemExit('Unexpected fdroidserver APK verification path; review the pinned revision.')
-          report = '''from zipfile import BadZipFile, ZipFile
+          report = '''import hashlib
+          import struct
+          from zipfile import BadZipFile, ZipFile
           try:
               def apk_entries(path):
-                  with ZipFile(path) as apk:
-                      return {entry.filename: (entry.CRC, entry.file_size, entry.compress_type,
-                                               entry.compress_size)
-                              for entry in apk.infolist()}
+                  entries = {}
+                  with ZipFile(path) as apk, open(path, 'rb') as raw:
+                      for entry in apk.infolist():
+                          raw.seek(entry.header_offset)
+                          header = raw.read(30)
+                          name_size, extra_size = struct.unpack_from('<HH', header, 26)
+                          header += raw.read(name_size + extra_size)
+                          digest = hashlib.sha256(raw.read(entry.compress_size)).hexdigest()
+                          entries[entry.filename] = (
+                              digest, entry.header_offset, hashlib.sha256(header).hexdigest(),
+                              entry.flag_bits, entry.date_time, entry.extra.hex(),
+                          )
+                  return entries
 
+              copied = os.path.join(tmpdir, 'sigcp_' + os.path.basename(unsigned_apk))
+              candidate = copied if os.path.isfile(copied) else unsigned_apk
               release = apk_entries(of)
-              rebuilt = apk_entries(unsigned_apk)
+              rebuilt = apk_entries(candidate)
+              logging.error('APK ZIP comparison against %s; entry order matches: %s',
+                            os.path.basename(candidate), list(release) == list(rebuilt))
               differences = [name for name in sorted(release.keys() | rebuilt.keys())
                              if release.get(name) != rebuilt.get(name)]
+              fields = ('compressed bytes', 'offset', 'local header', 'flags', 'timestamp', 'extra fields')
               logging.error('APK ZIP comparison: %d differing entries (only the first 50 shown)',
                             len(differences))
               for name in differences[:50]:
-                  logging.error('APK entry %r: release=%s rebuilt=%s (CRC, size, method, compressed size)',
-                                name, release.get(name), rebuilt.get(name))
+                  before, after = release.get(name), rebuilt.get(name)
+                  change = ('missing in candidate' if after is None else 'missing in release')
+                  if before is not None and after is not None:
+                      change = ', '.join(field for field, x, y in zip(fields, before, after) if x != y)
+                  logging.error('APK entry %r: %s', name, change)
               if not differences:
-                  logging.error('ZIP entry summaries match; inspect ordering, offsets, and ZIP metadata next.')
-          except (OSError, BadZipFile) as error:
+                  logging.error('ZIP entries match; compare central directory and end-of-archive records next.')
+          except (OSError, BadZipFile, struct.error) as error:
               logging.warning('Could not inspect APK ZIP entries: %s', error)
           '''
           updated = source.replace(marker, '                            if compare_result:\n'
