@@ -1,10 +1,15 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>Freetime Repository</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/x-icon" href="favicons/favicon.ico"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
         <header>
@@ -13,8 +18,8 @@
             <nav aria-label="Package sources">
                 <a href="#fdroid">F-Droid</a>
                 <a href="#apt">APT</a>
-                <a href="#yum">YUM / DNF</a>
-                <a href="#maven">Maven / Gradle</a>
+                <a href="#yum">YUM/DNF</a>
+                <a href="#maven">Maven/Gradle</a>
             </nav>
         </header>
         <main>
@@ -59,7 +64,7 @@
                 <pre><code>deb [arch=amd64 signed-by=/etc/apt/keyrings/freetime-repository.gpg] https://repo.free-time.me/apt stable main</code></pre>
             </section>
             <section id="yum">
-                <h2>YUM / DNF</h2>
+                <h2>YUM/DNF</h2>
                 <p>Fedora and RHEL · x86_64</p>
                 <p>
                     Save this configuration as
@@ -75,7 +80,7 @@ repo_gpgcheck=1
 gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
             </section>
             <section id="maven">
-                <h2>Maven / Gradle</h2>
+                <h2>Maven/Gradle</h2>
                 <p>
                     Libraries for Java and Kotlin. Add the following repository
                     in your Gradle Kotlin DSL configuration:
