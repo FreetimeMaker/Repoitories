@@ -83,7 +83,9 @@ additional packages, set the repository Actions variable
 (e.g. `build-tools;35.0.0`).
 
 GitHub Actions caches the JDK installations, Android SDK platforms and standard
-build components, Gradle downloads, and pip downloads across runs. Cache misses
+build tools, Gradle downloads, and pip downloads across runs. The SDK cache
+is saved before the build, with a five-minute timeout and a 2 GiB input limit.
+NDK and SDK CMake are excluded from this cache to reduce archive size. Cache misses
 still run the usual installation steps. Signing keys, credentials, local Gradle
 configuration, and built APKs are not cached. GitHub may evict caches to stay
 within the repository's cache storage limit.

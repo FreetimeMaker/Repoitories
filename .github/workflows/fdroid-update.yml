@@ -297,19 +297,18 @@ jobs:
           path: ${{ runner.tool_cache }}/Java_Zulu_jdk
           key: fdroid-jdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.week }}-11-to-25
 
-      - name: Cache Android SDK components
-        uses: actions/cache@v4
+      - name: Restore Android SDK cache
+        id: sdk-cache
+        uses: actions/cache/restore@v4
         with:
           path: |
             ${{ steps.cache.outputs.sdk_root }}/platforms
             ${{ steps.cache.outputs.sdk_root }}/platform-tools
             ${{ steps.cache.outputs.sdk_root }}/build-tools
-            ${{ steps.cache.outputs.sdk_root }}/ndk
-            ${{ steps.cache.outputs.sdk_root }}/cmake
             ${{ steps.cache.outputs.sdk_root }}/licenses
-          key: fdroid-sdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
+          key: fdroid-sdk-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
           restore-keys: |
-            fdroid-sdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
+            fdroid-sdk-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
 
       - name: Cache Gradle downloads
         uses: actions/cache@v4
@@ -440,6 +439,35 @@ jobs:
           echo "Runtime F-Droid Android configuration:"
           grep -E '^(sdk_path|apksigner):|^[[:space:]]+r28c:' config.yml
           apksigner version
+
+      - name: Check Android SDK cache size
+        id: sdk-cache-size
+        if: steps.sdk-cache.outputs.cache-hit != 'true'
+        shell: bash
+        env:
+          SDK_ROOT: ${{ steps.cache.outputs.sdk_root }}
+        run: |
+          set -euo pipefail
+          bytes=$(du -sb --total "$SDK_ROOT"/{platforms,platform-tools,build-tools,licenses} | tail -n 1 | cut -f1)
+          echo "Android SDK cache input: $bytes bytes"
+          if ((bytes <= 2147483648)); then
+            echo 'save=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'Skipping Android SDK cache save: input exceeds 2 GiB.'
+          fi
+
+      - name: Save Android SDK cache
+        if: steps.sdk-cache-size.outputs.save == 'true'
+        uses: actions/cache/save@v4
+        timeout-minutes: 5
+        continue-on-error: true
+        with:
+          path: |
+            ${{ steps.cache.outputs.sdk_root }}/platforms
+            ${{ steps.cache.outputs.sdk_root }}/platform-tools
+            ${{ steps.cache.outputs.sdk_root }}/build-tools
+            ${{ steps.cache.outputs.sdk_root }}/licenses
+          key: ${{ steps.sdk-cache.outputs.cache-primary-key }}
 
       - name: Set up gradlew-fdroid
         shell: bash
