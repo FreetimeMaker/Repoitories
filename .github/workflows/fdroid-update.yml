@@ -22,7 +22,7 @@ defaults:
   run:
     working-directory: fdroid
 
-jobs:  
+jobs:
   collect-apps:
     name: Collect existing apps
     if: github.ref == 'refs/heads/main' && github.event_name != 'push'
@@ -79,6 +79,8 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: "3.15"
+          cache: pip
+          cache-dependency-path: .github/workflows/fdroid-update.yml
 
       - name: Install F-Droid server tools
         shell: bash
@@ -274,23 +276,94 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Set up Java 17
+      - name: Resolve cache paths and keys
+        id: cache
+        shell: bash
+        env:
+          EXTRA_ANDROID_SDK_PACKAGES: ${{ vars.FDROID_ANDROID_SDK_PACKAGES }}
+        run: |
+          set -euo pipefail
+          sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          sdk_extras=$(printf '%s' "$EXTRA_ANDROID_SDK_PACKAGES" | sha256sum | cut -d ' ' -f1)
+          {
+            echo "sdk_root=$sdk_root"
+            echo "sdk_extras=$sdk_extras"
+            echo "week=$(date -u +%G-%V)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Cache Zulu JDK installations
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.tool_cache }}/Java_Zulu_jdk
+          key: fdroid-jdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.week }}-11-to-25
+
+      - name: Cache Android SDK components
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.cache.outputs.sdk_root }}/platforms
+            ${{ steps.cache.outputs.sdk_root }}/platform-tools
+            ${{ steps.cache.outputs.sdk_root }}/build-tools
+            ${{ steps.cache.outputs.sdk_root }}/ndk
+            ${{ steps.cache.outputs.sdk_root }}/cmake
+            ${{ steps.cache.outputs.sdk_root }}/licenses
+          key: fdroid-sdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
+          restore-keys: |
+            fdroid-sdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
+
+      - name: Cache Gradle downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/wrapper/dists
+            ~/.gradle/caches/modules-2/files-2.1
+            ~/.gradle/caches/modules-2/metadata-*
+          key: fdroid-gradle-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('fdroid/metadata/*.yml', 'fdroid/srclibs/*.yml') }}-${{ steps.cache.outputs.week }}
+          restore-keys: |
+            fdroid-gradle-v1-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Set up JDKs 11–25
         uses: actions/setup-java@v6
         with:
-          distribution: temurin
-          java-version: "25"
+          distribution: zulu
+          java-version: |
+            11
+            12
+            13
+            14
+            15
+            16
+            17
+            18
+            19
+            20
+            21
+            22
+            23
+            24
+            25
 
-      - name: Show Java version
+      - name: Register Java toolchains
         shell: bash
         run: |
           set -euo pipefail
-          java -version
-          echo "JAVA_HOME=$JAVA_HOME"
+          paths=()
+          for version in {11..25}; do
+            name="JAVA_HOME_${version}_X64"
+            home="${!name}"
+            test -x "$home/bin/javac"
+            paths+=("$home")
+          done
+          gradle_home="${GRADLE_USER_HOME:-$HOME/.gradle}"
+          mkdir -p "$gradle_home"
+          printf '\norg.gradle.java.installations.paths=%s\n' "$(IFS=,; echo "${paths[*]}")" >> "$gradle_home/gradle.properties"
 
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
           python-version: "3.15"
+          cache: pip
+          cache-dependency-path: .github/workflows/fdroid-update.yml
 
       - name: Install F-Droid server tools
         shell: bash
@@ -299,8 +372,18 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install fdroidserver
 
+      - name: Install system build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build pkg-config git curl ca-certificates zip unzip
+
       - name: Configure real Android SDK and accept licenses
         shell: bash
+        env:
+          EXTRA_ANDROID_SDK_PACKAGES: ${{ vars.FDROID_ANDROID_SDK_PACKAGES }}
         run: |
           set -euo pipefail
           SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
@@ -323,11 +406,28 @@ jobs:
             echo "::error::Android sdkmanager --licenses failed with exit code $LICENSE_STATUS."
             exit "$LICENSE_STATUS"
           fi
-          "$SDKMANAGER" --sdk_root="$SDK_ROOT" --channel=3 \
-            "platform-tools" \
-            "build-tools;34.0.0" \
-            "platforms;android-37.0" \
-            "ndk;28.0.13004108"
+          catalog=$("$SDKMANAGER" --sdk_root="$SDK_ROOT" --channel=3 --include_obsolete --list)
+          mapfile -t platforms < <(awk -F '|' '
+            {
+              path = $1
+              gsub(/^[[:space:]]+|[[:space:]]+$/, "", path)
+              if (NF > 1 && path ~ /^platforms;android-[[:alnum:]_.-]+$/) print path
+            }
+          ' <<< "$catalog" | sort -u)
+          if ((${#platforms[@]} == 0)); then
+            echo "::error::No Android SDK platforms found in the sdkmanager catalog."
+            exit 1
+          fi
+          printf 'Preparing %s Android SDK platforms.\n' "${#platforms[@]}"
+          packages=("platform-tools" "build-tools;34.0.0" "platforms;android-37.0" "ndk;28.0.13004108" "${platforms[@]}")
+          while IFS= read -r package; do
+            package="${package%$'\r'}"
+            [[ -z "$package" ]] && continue
+            [[ "$package" =~ ^[[:alnum:]][[:alnum:]_.\;-]*$ ]] || { echo "::error::Invalid Android SDK package name"; exit 1; }
+            packages+=("$package")
+          done <<< "$EXTRA_ANDROID_SDK_PACKAGES"
+          mapfile -t packages < <(printf '%s\n' "${packages[@]}" | sort -u)
+          "$SDKMANAGER" --sdk_root="$SDK_ROOT" --channel=3 --include_obsolete --install "${packages[@]}"
           APKSIGNER="$SDK_ROOT/build-tools/34.0.0/apksigner"
           if [ ! -x "$APKSIGNER" ]; then
             echo "::error::apksigner was not installed at $APKSIGNER"

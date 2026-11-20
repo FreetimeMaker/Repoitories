@@ -42,9 +42,9 @@ chmod 600 config.yml
 
 echo
 echo "==> Building all apps..."
-echo "fdroid build --all"
+echo "fdroid build --all --stop"
 
-fdroid build --all
+fdroid build --all --stop
 
 force_current_build() {
     local app_id="$1"
@@ -72,7 +72,7 @@ force_current_build() {
         echo
         echo "==> Forcing fresh source build for ${app_id}:${version_code} in test mode..."
         rm -f "$test_apk" "$test_src"
-        fdroid build --test --force "${app_id}:${version_code}"
+        fdroid build --test --force --stop "${app_id}:${version_code}"
 
         if [ ! -f "$test_apk" ]; then
             echo "::error::Expected test-built APK not found: $test_apk"

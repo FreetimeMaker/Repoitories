@@ -1,26 +1,30 @@
 # fdroid
+
 This repository hosts an [F-Droid](https://f-droid.org/) repo for my apps. This allows you to install and update apps very easily.
 
 ### Apps
 
 <!-- This table is auto-generated. Do not edit -->
-| Icon                                                                                                                                                            | Name | Description | Version    |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------| --- | --- |------------|
-| <a href="https://github.com/FreetimeMaker/Dualist"><img src="repo/icons/Dualist.png" alt="Dualist icon" width="36px" height="36px"></a>                         | [**Dualist**](https://github.com/FreetimeMaker/Dualist) | Modern, adaptive, and offline-first To-Do List app. | 1.1.8 (10) |
-| <a href="https://github.com/FreetimeMaker/GeoWeather"><img src="repo/icons/GeoWeather.png" alt="GeoWeather icon" width="36px" height="36px"></a>                | [**GeoWeather**](https://github.com/FreetimeMaker/GeoWeather) | Modern weather app with 16-day forecast for multiple cities | 4.7.3 (92) |
-| <a href="https://github.com/FreetimeMaker/Luma-Store-Android"><img src="repo/icons/Luma-Store.png" alt="Luma Store Icon" width="36px" height="36px"></a>        | [**Luma Store**](https://github.com/FreetimeMaker/Luma-Store-Android) | Discover, install and update apps from Luma Store and optional repositories. | 4.4.2 (32) |
-| <a href="https://github.com/FreetimeMaker/SuperSMP-Companion-App"><img src="repo/icons/SSMPC.png" alt="SuperSMP Companion icon" width="36px" height="36px"></a> | [**SuperSMP Companion**](https://github.com/FreetimeMaker/SuperSMP-Companion-App) | Vote, shop & explore SuperSMP anywhere! Companion app for server features | 2.0.1 (23) |
+
+| Icon                                                                                                                                                            | Name                                                                              | Description                                                                  | Version    |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------- |
+| <a href="https://github.com/FreetimeMaker/Dualist"><img src="repo/icons/Dualist.png" alt="Dualist icon" width="36px" height="36px"></a>                         | [**Dualist**](https://github.com/FreetimeMaker/Dualist)                           | Modern, adaptive, and offline-first To-Do List app.                          | 1.1.8 (10) |
+| <a href="https://github.com/FreetimeMaker/GeoWeather"><img src="repo/icons/GeoWeather.png" alt="GeoWeather icon" width="36px" height="36px"></a>                | [**GeoWeather**](https://github.com/FreetimeMaker/GeoWeather)                     | Modern weather app with 16-day forecast for multiple cities                  | 4.7.3 (92) |
+| <a href="https://github.com/FreetimeMaker/Luma-Store-Android"><img src="repo/icons/Luma-Store.png" alt="Luma Store Icon" width="36px" height="36px"></a>        | [**Luma Store**](https://github.com/FreetimeMaker/Luma-Store-Android)             | Discover, install and update apps from Luma Store and optional repositories. | 4.4.2 (32) |
+| <a href="https://github.com/FreetimeMaker/SuperSMP-Companion-App"><img src="repo/icons/SSMPC.png" alt="SuperSMP Companion icon" width="36px" height="36px"></a> | [**SuperSMP Companion**](https://github.com/FreetimeMaker/SuperSMP-Companion-App) | Vote, shop & explore SuperSMP anywhere! Companion app for server features    | 2.0.1 (23) |
+
 <!-- end apps table -->
 
 ### How to use
+
 1. At first, you should [install the F-Droid app](https://f-droid.org/), it's an alternative app store for Android.
 2. Now you can copy the following [link](https://repo.free-time.me/fdroid/repo), then add this repository to your F-Droid client:
 
-    ```
-    https://repo.free-time.me/fdroid/repo
-    ```
+   ```
+   https://repo.free-time.me/fdroid/repo
+   ```
 
-    Alternatively, you can also scan this QR code:
+   Alternatively, you can also scan this QR code:
 
     <p align="center">
       <img src="repo/index.png?raw=true" alt="F-Droid repo QR code"/>
@@ -59,5 +63,34 @@ Note: This is a Jekyll project now. **Vercel** cannot build it (it expected the
 previous Next.js setup with `package.json`/`pages/`), so Vercel should be disabled
 for the domain; GitHub Pages is the host.
 
-### [License](LICENSE)
-The license is for the files in this repository, *except* those in the `fdroid` directory. These files *might* be licensed differently; you can use an F-Droid client to get the details for each app.
+### [License](../LICENSE)
+
+The license is for the files in this repository, _except_ those in the `fdroid` directory. These files _might_ be licensed differently; you can use an F-Droid client to get the details for each app.
+
+### CI build toolchains
+
+The update workflow installs JDKs 11 through 25 side by side and exposes all of
+them to Gradle Java toolchains. The existing build launcher defaults to Java 17;
+projects can select their compiler toolchain in Gradle or specify Gradle daemon
+JVM criteria where supported by their wrapper version.
+
+Before building, the workflow accepts Android SDK licenses and installs every
+Android platform (`platforms;android-*`) listed by `sdkmanager`, including
+available preview and obsolete platforms. Other package families (such as
+build tools, NDKs, and emulator images) are not installed in full. To preinstall
+additional packages, set the repository Actions variable
+`FDROID_ANDROID_SDK_PACKAGES` to one `sdkmanager` package ID per line
+(e.g. `build-tools;35.0.0`).
+
+GitHub Actions caches the JDK installations, Android SDK platforms and standard
+build components, Gradle downloads, and pip downloads across runs. Cache misses
+still run the usual installation steps. Signing keys, credentials, local Gradle
+configuration, and built APKs are not cached. GitHub may evict caches to stay
+within the repository's cache storage limit.
+
+The runner installs the native build tools (compiler, Make, CMake, Ninja, and
+pkg-config) before invoking F-Droid. F-Droid uses the selected recipe for
+source libraries and submodules; Gradle resolves plugins and direct and
+transitive dependencies using the selected revision's repository declarations.
+Cached downloads are reused, but the build is not forced offline. If dependency
+resolution fails, the build stops before signing and index generation.
