@@ -284,6 +284,8 @@ jobs:
         run: |
           set -euo pipefail
           sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          mkdir -p "$RUNNER_TEMP/fdroid-sdk-platforms"
+          find "$sdk_root/platforms" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' > "$RUNNER_TEMP/fdroid-sdk-preinstalled"
           sdk_extras=$(printf '%s' "$EXTRA_ANDROID_SDK_PACKAGES" | sha256sum | cut -d ' ' -f1)
           {
             echo "sdk_root=$sdk_root"
@@ -292,26 +294,34 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Cache Zulu JDK installations
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ runner.tool_cache }}/Java_Zulu_jdk
           key: fdroid-jdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.week }}-11-to-25
 
       - name: Restore Android SDK cache
         id: sdk-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
-          path: |
-            ${{ steps.cache.outputs.sdk_root }}/platforms
-            ${{ steps.cache.outputs.sdk_root }}/platform-tools
-            ${{ steps.cache.outputs.sdk_root }}/build-tools
-            ${{ steps.cache.outputs.sdk_root }}/licenses
-          key: fdroid-sdk-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
+          path: ${{ runner.temp }}/fdroid-sdk-platforms
+          key: fdroid-sdk-v3-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
           restore-keys: |
-            fdroid-sdk-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
+            fdroid-sdk-v3-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
+
+      - name: Apply cached Android platforms
+        shell: bash
+        env:
+          SDK_ROOT: ${{ steps.cache.outputs.sdk_root }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for platform in "$RUNNER_TEMP/fdroid-sdk-platforms"/android-*; do
+            [[ -d "$platform" ]] || continue
+            [[ -e "$SDK_ROOT/platforms/${platform##*/}" ]] || cp -a "$platform" "$SDK_ROOT/platforms/"
+          done
 
       - name: Cache Gradle downloads
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.gradle/wrapper/dists
@@ -448,25 +458,33 @@ jobs:
           SDK_ROOT: ${{ steps.cache.outputs.sdk_root }}
         run: |
           set -euo pipefail
-          bytes=$(du -sb --total "$SDK_ROOT"/{platforms,platform-tools,build-tools,licenses} | tail -n 1 | cut -f1)
+          shopt -s nullglob
+          cache="$RUNNER_TEMP/fdroid-sdk-platforms"
+          candidates=()
+          for platform in "$SDK_ROOT/platforms"/android-*; do
+            [[ -d "$platform" ]] || continue
+            grep -Fxq -- "${platform##*/}" "$RUNNER_TEMP/fdroid-sdk-preinstalled" && continue
+            candidates+=("$platform")
+          done
+          ((${#candidates[@]} > 0)) || exit 0
+          bytes=$(du -sb --total "${candidates[@]}" | tail -n 1 | cut -f1)
           echo "Android SDK cache input: $bytes bytes"
-          if ((bytes <= 2147483648)); then
-            echo 'save=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'Skipping Android SDK cache save: input exceeds 2 GiB.'
+          if ((bytes > 1073741824)); then
+            echo 'Skipping Android SDK cache save: input exceeds 1 GiB.'
+            exit 0
           fi
+          rm -rf -- "$cache"
+          mkdir -p "$cache"
+          cp -a --reflink=auto "${candidates[@]}" "$cache/"
+          echo 'save=true' >> "$GITHUB_OUTPUT"
 
       - name: Save Android SDK cache
         if: steps.sdk-cache-size.outputs.save == 'true'
-        uses: actions/cache/save@v4
-        timeout-minutes: 5
+        uses: actions/cache/save@v6
+        timeout-minutes: 2
         continue-on-error: true
         with:
-          path: |
-            ${{ steps.cache.outputs.sdk_root }}/platforms
-            ${{ steps.cache.outputs.sdk_root }}/platform-tools
-            ${{ steps.cache.outputs.sdk_root }}/build-tools
-            ${{ steps.cache.outputs.sdk_root }}/licenses
+          path: ${{ runner.temp }}/fdroid-sdk-platforms
           key: ${{ steps.sdk-cache.outputs.cache-primary-key }}
 
       - name: Set up gradlew-fdroid

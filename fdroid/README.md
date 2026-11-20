@@ -82,11 +82,11 @@ additional packages, set the repository Actions variable
 `FDROID_ANDROID_SDK_PACKAGES` to one `sdkmanager` package ID per line
 (e.g. `build-tools;35.0.0`).
 
-GitHub Actions caches the JDK installations, Android SDK platforms and standard
-build tools, Gradle downloads, and pip downloads across runs. The SDK cache
-is saved before the build, with a five-minute timeout and a 2 GiB input limit.
-NDK and SDK CMake are excluded from this cache to reduce archive size. Cache misses
-still run the usual installation steps. Signing keys, credentials, local Gradle
+GitHub Actions caches JDK installations, Gradle and pip downloads, and Android
+platforms that are not preinstalled on the runner. The SDK cache is saved before
+the build, with a two-minute timeout and a 1 GiB input limit. SDK tools and NDKs
+are not included in this cache. Cache misses still run the usual installation steps.
+Signing keys, credentials, local Gradle
 configuration, and built APKs are not cached. GitHub may evict caches to stay
 within the repository's cache storage limit.
 

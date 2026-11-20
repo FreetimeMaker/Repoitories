@@ -1,5 +1,9 @@
 # Freetime Repository
 
+This Repository is Sponsored by 
+
+[![Sponsor](https://readme.cash/i/2cn66a5gez.svg)](https://readme.cash/c/2cn66a5gez)
+
 GitHub Actions publishes one static site from the package trees on `main`.
 An update to one package format does not replace the other formats.
 
