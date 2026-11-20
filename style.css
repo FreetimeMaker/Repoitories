@@ -1,52 +1,58 @@
 :root {
-  color-scheme: light dark;
-  font: 1rem/1.55 system-ui, sans-serif;
+    color-scheme: light dark;
+    font:
+        1rem/1.55 system-ui,
+        sans-serif;
 }
 
 body {
-  max-width: 68rem;
-  margin: 3rem auto;
-  padding: 0 1rem;
+    max-width: 68rem;
+    margin: 3rem auto;
+    padding: 0 1rem;
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.1;
-  margin: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.1;
+    margin: 0;
 }
 
 nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
 }
 
 main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    gap: 1rem;
 }
 
 section {
-  min-width: 0;
-  padding: 1.25rem;
-  border: 1px solid GrayText;
-  border-radius: 1rem;
+    min-width: 0;
+    padding: 1.25rem;
+    border: 1px solid GrayText;
+    border-radius: 1rem;
 }
 
-h2 { margin-top: 0; }
-code { overflow-wrap: anywhere; }
+h2 {
+    margin-top: 0;
+}
+code {
+    overflow-wrap: anywhere;
+}
 
 pre {
-  padding: 0.75rem;
-  border: 1px solid GrayText;
-  border-radius: 0.5rem;
-  white-space: pre-wrap;
+    padding: 0.75rem;
+    border: 1px solid GrayText;
+    border-radius: 0.5rem;
+    white-space: pre-wrap;
 }
 
 footer {
-  margin-top: 3rem;
-  font-size: 0.875rem;
-  text-align: center;
+    margin-top: 3rem;
+    font-size: 0.875rem;
+    text-align: center;
 }

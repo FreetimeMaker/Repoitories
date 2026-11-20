@@ -12,6 +12,7 @@ on:
         yum/**,
         maven/**,
         public.gpg,
+        favicons/**,
         .github/workflows/deploy.yml,
       ]
   workflow_run:
@@ -61,7 +62,7 @@ jobs:
               }
             test -s "fdroid/$section/entry.jar"
           done
-          paths=(index.html style.css CNAME fdroid/repo fdroid/archive)
+          paths=(index.html style.css CNAME favicons fdroid/repo fdroid/archive)
           for path in apt yum maven public.gpg; do
             if git cat-file -e "HEAD:$path"; then paths+=("$path"); fi
           done
