@@ -367,7 +367,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.15"
+          # Newer zipfile clears the UTF-8 flag on ASCII names when copying APK v1 metadata.
+          python-version: "3.12"
           cache: pip
           cache-dependency-path: .github/workflows/fdroid-update.yml
 
