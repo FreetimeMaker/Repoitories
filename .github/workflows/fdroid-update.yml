@@ -379,6 +379,27 @@ jobs:
           # 2.4.5 assigns None to SOURCE_DATE_EPOCH before a fresh source checkout.
           python -m pip install "fdroidserver @ git+https://github.com/f-droid/fdroidserver.git@fc2c86473e66a44fc641f403c338a8b2cccfad88"
 
+      - name: Allow the Freetime Maven repository in the source scanner
+        shell: bash
+        run: |
+          python - <<'PY'
+          from importlib.util import find_spec
+          from pathlib import Path
+
+          scanner = Path(find_spec('fdroidserver').origin).with_name('scanner.py')
+          source = scanner.read_text(encoding='utf-8')
+          original = 'if not any(r.match(url) for r in allowed_repos):'
+          if source.count(original) != 1:
+              raise SystemExit('Unexpected fdroidserver Maven scanner; review the pinned revision.')
+          updated = source.replace(
+              original,
+              'if url not in {"https://repo.free-time.me/maven", "https://repo.free-time.me/maven/"} '
+              'and not any(r.match(url) for r in allowed_repos):',
+          )
+          compile(updated, str(scanner), 'exec')
+          scanner.write_text(updated, encoding='utf-8')
+          PY
+
       - name: Install system build dependencies
         shell: bash
         run: |
