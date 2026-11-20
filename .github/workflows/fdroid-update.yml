@@ -305,9 +305,9 @@ jobs:
         uses: actions/cache/restore@v6
         with:
           path: ${{ runner.temp }}/fdroid-sdk-platforms
-          key: fdroid-sdk-v3-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
+          key: fdroid-sdk-v5-api24-to-37_2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-${{ steps.cache.outputs.week }}
           restore-keys: |
-            fdroid-sdk-v3-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
+            fdroid-sdk-v5-api24-to-37_2-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.sdk_extras }}-
 
       - name: Apply cached Android platforms
         shell: bash
@@ -496,11 +496,12 @@ jobs:
             exit "$LICENSE_STATUS"
           fi
           catalog=$("$SDKMANAGER" --sdk_root="$SDK_ROOT" --channel=3 --include_obsolete --list)
-          mapfile -t platforms < <(awk -F '|' '
+          platform_range='^platforms;android-((2[4-9]|3[0-6])([.][0-9]+)?|37([.][0-2])?)$'
+          mapfile -t platforms < <(awk -v range="$platform_range" -F '|' '
             {
               path = $1
               gsub(/^[[:space:]]+|[[:space:]]+$/, "", path)
-              if (NF > 1 && path ~ /^platforms;android-[[:alnum:]_.-]+$/) print path
+              if (NF > 1 && path ~ range) print path
             }
           ' <<< "$catalog" | sort -u)
           if ((${#platforms[@]} == 0)); then
@@ -513,6 +514,9 @@ jobs:
             package="${package%$'\r'}"
             [[ -z "$package" ]] && continue
             [[ "$package" =~ ^[[:alnum:]][[:alnum:]_.\;-]*$ ]] || { echo "::error::Invalid Android SDK package name"; exit 1; }
+            if [[ "$package" == platforms\;* && ! "$package" =~ $platform_range ]]; then
+              continue
+            fi
             packages+=("$package")
           done <<< "$EXTRA_ANDROID_SDK_PACKAGES"
           mapfile -t packages < <(printf '%s\n' "${packages[@]}" | sort -u)

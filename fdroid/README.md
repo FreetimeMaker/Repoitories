@@ -75,9 +75,8 @@ The build launcher defaults to Java 17;
 projects can select their compiler toolchain in Gradle or specify Gradle daemon
 JVM criteria where supported by their wrapper version.
 
-Before building, the workflow accepts Android SDK licenses and installs every
-Android platform (`platforms;android-*`) listed by `sdkmanager`, including
-available preview and obsolete platforms. Other package families (such as
+Before building, the workflow accepts Android SDK licenses and installs Android platforms listed by `sdkmanager` from `platforms;android-24`
+through `platforms;android-37.2`, inclusive. Other package families (such as
 build tools, NDKs, and emulator images) are not installed in full. To preinstall
 additional packages, set the repository Actions variable
 `FDROID_ANDROID_SDK_PACKAGES` to one `sdkmanager` package ID per line
