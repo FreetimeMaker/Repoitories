@@ -87,7 +87,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          python -m pip install fdroidserver
+          # 2.4.5 assigns None to SOURCE_DATE_EPOCH before a fresh source checkout.
+          python -m pip install "fdroidserver @ git+https://github.com/f-droid/fdroidserver.git@fc2c86473e66a44fc641f403c338a8b2cccfad88"
 
       - name: Save metadata file list
         shell: bash
@@ -375,7 +376,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          python -m pip install fdroidserver
+          # 2.4.5 assigns None to SOURCE_DATE_EPOCH before a fresh source checkout.
+          python -m pip install "fdroidserver @ git+https://github.com/f-droid/fdroidserver.git@fc2c86473e66a44fc641f403c338a8b2cccfad88"
 
       - name: Install system build dependencies
         shell: bash
