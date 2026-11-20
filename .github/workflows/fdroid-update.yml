@@ -38,12 +38,6 @@ jobs:
         with:
           ref: main
 
-      - name: Go into fdroid directory
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd fdroid
-
       - name: Collect existing apps
         id: apps
         shell: bash
