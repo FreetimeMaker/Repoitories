@@ -156,6 +156,11 @@ Builds:
     subdir: app
     gradle:
       - yes
+    # The scanner removes the tag's Java 21 daemon criteria file.
+    prebuild:
+      - test -x "$JAVA_HOME_21_X64/bin/java"
+      - |-
+        printf '\norg.gradle.java.home=%s\n' "$JAVA_HOME_21_X64" >> ../gradle.properties
 
 AllowedAPKSigningKeys: b2d882225565f0a6e5dde62de1e3a0869177c08b713f8bccdae57d8ad29f1ef2
 
