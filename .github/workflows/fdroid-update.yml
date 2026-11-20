@@ -509,7 +509,7 @@ jobs:
             exit 1
           fi
           printf 'Preparing %s Android SDK platforms.\n' "${#platforms[@]}"
-          packages=("platform-tools" "build-tools;34.0.0" "platforms;android-37.0" "ndk;28.0.13004108" "${platforms[@]}")
+          packages=("platform-tools" "build-tools;34.0.0" "build-tools;35.0.0" "platforms;android-37.0" "ndk;28.0.13004108" "${platforms[@]}")
           while IFS= read -r package; do
             package="${package%$'\r'}"
             [[ -z "$package" ]] && continue
