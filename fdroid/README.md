@@ -69,8 +69,9 @@ The license is for the files in this repository, _except_ those in the `fdroid` 
 
 ### CI build toolchains
 
-The update workflow installs JDKs 11 through 25 side by side and exposes all of
-them to Gradle Java toolchains. The existing build launcher defaults to Java 17;
+The update workflow installs Eclipse Temurin JDKs for Java 11 and 16–25 and
+exposes them to Gradle Java toolchains. Temurin does not publish Java 12–15.
+The build launcher defaults to Java 17;
 projects can select their compiler toolchain in Gradle or specify Gradle daemon
 JVM criteria where supported by their wrapper version.
 

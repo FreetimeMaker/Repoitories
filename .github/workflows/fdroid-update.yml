@@ -293,11 +293,11 @@ jobs:
             echo "week=$(date -u +%G-%V)"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Cache Zulu JDK installations
+      - name: Cache Temurin JDK installations
         uses: actions/cache@v6
         with:
-          path: ${{ runner.tool_cache }}/Java_Zulu_jdk
-          key: fdroid-jdk-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.week }}-11-to-25
+          path: ${{ runner.tool_cache }}/Java_Temurin-Hotspot_jdk
+          key: fdroid-jdk-v3-${{ runner.os }}-${{ runner.arch }}-${{ steps.cache.outputs.week }}-temurin-11-16-to-25
 
       - name: Restore Android SDK cache
         id: sdk-cache
@@ -331,16 +331,12 @@ jobs:
           restore-keys: |
             fdroid-gradle-v1-${{ runner.os }}-${{ runner.arch }}-
 
-      - name: Set up JDKs 11–25
+      - name: Set up Temurin JDKs
         uses: actions/setup-java@v6
         with:
-          distribution: zulu
+          distribution: temurin
           java-version: |
             11
-            12
-            13
-            14
-            15
             16
             17
             18
@@ -357,7 +353,7 @@ jobs:
         run: |
           set -euo pipefail
           paths=()
-          for version in {11..25}; do
+          for version in 11 {16..25}; do
             name="JAVA_HOME_${version}_X64"
             home="${!name}"
             test -x "$home/bin/javac"
