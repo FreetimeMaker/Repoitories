@@ -400,6 +400,47 @@ jobs:
           scanner.write_text(updated, encoding='utf-8')
           PY
 
+      - name: Report APK differences before F-Droid removes failed builds
+        shell: bash
+        run: |
+          python - <<'PY'
+          from importlib.util import find_spec
+          from pathlib import Path
+          from textwrap import indent
+
+          build = Path(find_spec('fdroidserver').origin).with_name('build.py')
+          source = build.read_text(encoding='utf-8')
+          marker = '                            if compare_result:\n                                if options.test:'
+          if source.count(marker) != 1:
+              raise SystemExit('Unexpected fdroidserver APK verification path; review the pinned revision.')
+          report = '''from zipfile import BadZipFile, ZipFile
+          try:
+              def apk_entries(path):
+                  with ZipFile(path) as apk:
+                      return {entry.filename: (entry.CRC, entry.file_size, entry.compress_type,
+                                               entry.compress_size)
+                              for entry in apk.infolist()}
+
+              release = apk_entries(of)
+              rebuilt = apk_entries(unsigned_apk)
+              differences = [name for name in sorted(release.keys() | rebuilt.keys())
+                             if release.get(name) != rebuilt.get(name)]
+              logging.error('APK ZIP comparison: %d differing entries (only the first 50 shown)',
+                            len(differences))
+              for name in differences[:50]:
+                  logging.error('APK entry %r: release=%s rebuilt=%s (CRC, size, method, compressed size)',
+                                name, release.get(name), rebuilt.get(name))
+              if not differences:
+                  logging.error('ZIP entry summaries match; inspect ordering, offsets, and ZIP metadata next.')
+          except (OSError, BadZipFile) as error:
+              logging.warning('Could not inspect APK ZIP entries: %s', error)
+          '''
+          updated = source.replace(marker, '                            if compare_result:\n'
+                                   + indent(report, ' ' * 32) + '                                if options.test:')
+          compile(updated, str(build), 'exec')
+          build.write_text(updated, encoding='utf-8')
+          PY
+
       - name: Install system build dependencies
         shell: bash
         run: |
