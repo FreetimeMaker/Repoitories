@@ -1,0 +1,5 @@
+• Fixed data loading when API hosting is disabled (HTTP 402)
+• Load catalogue, app details and developer profiles through Supabase during API outages
+• Load ratings, reviews and favourites through Supabase when the API is unavailable
+• Preserve authentication and validation checks for fallback operations
+• Preserve search, update badges and unsaved-change protection

@@ -1,6 +1,8 @@
 AntiFeatures:
   NonFreeNet:
-    en-US: Offers Google sign-in for users and GitHub or GitLab sign-in for developer features. Browsing and installing apps do not require an account.
+    en-US: Offers Google sign-in for users and GitHub or GitLab sign-in for 
+      developer features. Browsing and installing apps do not require an 
+      account.
 Categories:
   - App Store & Updater
 License: GPL-3.0-only
@@ -21,7 +23,8 @@ AutoName: Luma Store
 
 RepoType: git
 Repo: https://github.com/FreetimeMaker/Luma-Store-Android.git
-Binaries: https://github.com/FreetimeMaker/Luma-Store-Android/releases/download/v%v/Luma-Store-v%v.apk
+Binaries: 
+  https://github.com/FreetimeMaker/Luma-Store-Android/releases/download/v%v/Luma-Store-v%v.apk
 
 Builds:
   - versionName: 2.3.0
@@ -150,9 +153,17 @@ Builds:
     gradle:
       - yes
 
-AllowedAPKSigningKeys: b2d882225565f0a6e5dde62de1e3a0869177c08b713f8bccdae57d8ad29f1ef2
+  - versionName: 4.4.3
+    versionCode: 33
+    commit: 02eec74118782fb68b831ab63c664cd67f6d7383
+    subdir: app
+    gradle:
+      - yes
+
+AllowedAPKSigningKeys: 
+  b2d882225565f0a6e5dde62de1e3a0869177c08b713f8bccdae57d8ad29f1ef2
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 4.4.2
-CurrentVersionCode: 32
+CurrentVersion: 4.4.3
+CurrentVersionCode: 33
