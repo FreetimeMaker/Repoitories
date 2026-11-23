@@ -150,21 +150,9 @@ Builds:
     gradle:
       - yes
 
-  - versionName: 4.4.3
-    versionCode: 33
-    commit: 02eec74118782fb68b831ab63c664cd67f6d7383
-    subdir: app
-    gradle:
-      - yes
-    # The scanner removes the tag's Java 21 daemon criteria file.
-    prebuild:
-      - test -x "$JAVA_HOME_21_X64/bin/java"
-      - |-
-        printf '\norg.gradle.java.home=%s\n' "$JAVA_HOME_21_X64" >> ../gradle.properties
-
 AllowedAPKSigningKeys: b2d882225565f0a6e5dde62de1e3a0869177c08b713f8bccdae57d8ad29f1ef2
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 4.4.3
-CurrentVersionCode: 33
+CurrentVersion: 4.4.2
+CurrentVersionCode: 32

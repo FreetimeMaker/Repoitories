@@ -54,7 +54,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for section in repo archive; do
+          for section in repo; do
             jq -e --arg url "https://repo.free-time.me/fdroid/$section" \
               '.repo.address == $url' "fdroid/$section/index-v2.json" >/dev/null || {
                 echo '::error::Run the F-Droid update first to regenerate and sign indexes for the new domain.'
@@ -62,7 +62,7 @@ jobs:
               }
             test -s "fdroid/$section/entry.jar"
           done
-          paths=(index.html style.css CNAME favicons fdroid/repo fdroid/archive)
+          paths=(index.html style.css CNAME favicons fdroid/repo)
           for path in apt yum maven public.gpg; do
             if git cat-file -e "HEAD:$path"; then paths+=("$path"); fi
           done
@@ -70,9 +70,7 @@ jobs:
           # Preserve generated F-Droid pages and assets at their original paths.
           git archive HEAD -- "${paths[@]}" | tar -x -C _site \
             --exclude='fdroid/repo/status' \
-            --exclude='fdroid/archive/status' \
-            --exclude='fdroid/repo/*.log.gz' \
-            --exclude='fdroid/archive/*.log.gz'
+            --exclude='fdroid/repo/*.log.gz'
           test -s _site/fdroid/repo/index.png
           touch _site/.nojekyll
           if [[ -n "$(find _site -type l -print -quit)" ]]; then

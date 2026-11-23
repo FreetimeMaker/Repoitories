@@ -24,6 +24,7 @@ repo/*.apk.idsig
 **/fdroid/keystore.p12
 **/fdroid/*.jks
 **/fdroid/temp_secrets/
+/fdroid/archive/
 /_site/
 __pycache__/
 /private.gpg

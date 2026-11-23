@@ -162,23 +162,9 @@ Builds:
     gradle:
       - yes
 
-  - versionName: 4.7.4
-    versionCode: 93
-    commit: 4b520421dd3b87733e0452916a12fd6bb037f5c6
-    subdir: app
-    gradle:
-      - yes
-    postbuild:
-      - mv "$$OUT$$" "$$OUT$$.unaligned"
-      - >-
-        "$ANDROID_HOME"/build-tools/35.0.0/zipalign -f -P 16 4 "$$OUT$$.unaligned" "$$OUT$$"
-      - >-
-        "$ANDROID_HOME"/build-tools/35.0.0/zipalign -c -P 16 4 "$$OUT$$"
-      - rm "$$OUT$$.unaligned"
-
 AllowedAPKSigningKeys: e7370a3e2d3e5baa7124bea7fff3e2955e80c68f5c07ef0c8b9137e76e86e283
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 4.7.4
-CurrentVersionCode: 93
+CurrentVersion: 4.7.3
+CurrentVersionCode: 92

@@ -140,4 +140,6 @@ for METADATA_FILE in "${METADATA_FILES[@]}"; do
 done
 
 echo
+python3 ./prune-changelogs.py "$TARGET_APP"
+
 echo "==> Finished updating changelogs."
