@@ -1,0 +1,2 @@
+• Removed the extra APK alignment rewrite before signing; the 16 KB alignment check remains active
+• Added release-signature reproduction verification against the F-Droid build before publication
