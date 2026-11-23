@@ -24,131 +24,6 @@ Binaries:
   https://github.com/FreetimeMaker/GeoWeather/releases/download/v%v/GeoWeather-v%v.apk
 
 Builds:
-  - versionName: 3.1.2
-    versionCode: 70
-    commit: 74c72284fb1ab2a06655f4120f9b2cde52dc0553
-    subdir: androidApp
-    gradle:
-      - yes
-    srclibs:
-      - reproducible-apk-tools@v0.3.0
-    postbuild:
-      - mv $$OUT$$ unaligned.apk
-      - $$reproducible-apk-tools$$/zipalign.py --page-size 16 
-        --pad-like-apksigner --replace unaligned.apk $$OUT$$
-
-  - versionName: 3.1.3
-    versionCode: 71
-    commit: e9aa20920687750797ee9e3eb9e6fff1a43858bc
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.0.1
-    versionCode: 73
-    commit: 616ac9a6a7b4e5c2ddd6c623bf8c7526aa08f3ee
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.0.2
-    versionCode: 74
-    commit: 181ad63bb481dd42fd21c146ec6b5658fdaa2340
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.0.3
-    versionCode: 75
-    commit: 160619baa1fb5c9fba3cff4abc85d77f3672f07d
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.1.0
-    versionCode: 76
-    commit: 646f008c64b3f88f8c237568e9509430daf7d897
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.2.0
-    versionCode: 77
-    commit: 46553a27ac43184e5ade481de7158abd3b7941f6
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.3.0
-    versionCode: 78
-    commit: 57e1ed323c49992fe99a7cc5b95c61e178a67c08
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.4.0
-    versionCode: 79
-    commit: 6bede0f42268afcc73cc84bd8f667e3362f1aa68
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.4.1
-    versionCode: 80
-    commit: 2aba5bed6c57bd80aaf37d055d267342cd5ff896
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.6.0
-    versionCode: 83
-    commit: e11a848ffc0174312e43170e268f64a41f9edb6c
-    subdir: androidApp
-    gradle:
-      - yes
-
-  - versionName: 4.6.1
-    versionCode: 84
-    commit: e1889dd75956c02b8b25985e3f5a9c7c1dbc2bf5
-    subdir: app
-    gradle:
-      - yes
-
-  - versionName: 4.6.3
-    versionCode: 86
-    commit: a12f9619b00b8b2001c9772a7e796bb813b86b58
-    subdir: app
-    gradle:
-      - yes
-
-  - versionName: 4.6.4
-    versionCode: 87
-    commit: f2b05e3432bb25783c27e28d67fef77cdf2cc941
-    subdir: app
-    gradle:
-      - yes
-
-  - versionName: 4.6.5
-    versionCode: 88
-    commit: d7c1f8664e908d17ac3f0e2946cabe9cbecc6854
-    subdir: app
-    gradle:
-      - yes
-
-  - versionName: 4.7.0
-    versionCode: 89
-    commit: 946a63ec5cddcff2d9e2baee20267ee8805fcd4b
-    subdir: app
-    gradle:
-      - yes
-
-  - versionName: 4.7.1
-    versionCode: 90
-    commit: 62761224c4fc7bcb60f485589af850fe8eb170a5
-    subdir: app
-    gradle:
-      - yes
-
   - versionName: 4.7.2
     versionCode: 91
     commit: 5ebde277bf925c04c331de61136488170ff4d9af
@@ -163,9 +38,9 @@ Builds:
     gradle:
       - yes
 
-  - versionName: 4.7.4
-    versionCode: 93
-    commit: 4b520421dd3b87733e0452916a12fd6bb037f5c6
+  - versionName: 4.7.5
+    versionCode: 94
+    commit: ca0449b3e3ee2f6da122a207327f6cf704f5d489
     subdir: app
     gradle:
       - yes
@@ -175,5 +50,5 @@ AllowedAPKSigningKeys:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 4.7.4
-CurrentVersionCode: 93
+CurrentVersion: 4.7.5
+CurrentVersionCode: 94

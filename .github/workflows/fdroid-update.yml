@@ -103,6 +103,7 @@ jobs:
         run: |
           set -euo pipefail
           fdroid checkupdates --auto --autoonly --allow-dirty "$APP_ID"
+          python3 ./check-metadata-update.py "$APP_ID" "metadata/$APP_ID.yml"
 
       - name: Ensure no apps were added or removed
         shell: bash
@@ -205,6 +206,10 @@ jobs:
             VERSION_CODE="$(jq -r '.version_code' "$RESULT_FILE")"
             SOURCE_CODE="$(jq -r '.source_code' "$RESULT_FILE" | sed 's#/$##')"
             RESULT_DIR="$(dirname "$RESULT_FILE")"
+            if ! python3 ./check-metadata-update.py "$APP_ID" "$RESULT_DIR/metadata/$APP_ID.yml"; then
+              echo "::warning::Skipping stale or historical metadata update for $APP_ID."
+              continue
+            fi
             cp "$RESULT_DIR/metadata/$APP_ID.yml" "metadata/$APP_ID.yml"
             chmod +x ./changelogs.sh
             ./changelogs.sh "$APP_ID"
