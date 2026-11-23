@@ -15,6 +15,32 @@ This repository hosts an [F-Droid](https://f-droid.org/) repo for my apps. This 
 
 <!-- end apps table -->
 
+### Build-tested metadata updates
+
+Automatic updates are staged as workflow artifacts first. Before metadata is
+committed to `main`, `test-updates` builds every new or changed build recipe and
+the candidate current version in the official F-Droid buildserver container.
+Like GeoWeather and Luma Store CI, it runs `fdroid scanner --verbose --refresh
+--exit-code`, followed by `fdroid build --verbose --on-server --stop --test
+--refresh-scanner --scan-binary --no-tarball`.
+Scanner errors, failed builds, missing APKs and reference-binary comparison
+failures block the update. No scanner bypass or `--force` is used. A failure
+blocks the entire update batch; metadata on `main` stays unchanged.
+
+The job runs on GitHub-hosted `ubuntu-latest` with Docker image
+`registry.gitlab.com/fdroid/fdroidserver:buildserver-trixie`. No self-hosted
+runner, Vagrant box, KVM setup or additional repository variables are needed.
+The image digest is recorded in the `fdroid-build-results` artifact, together
+with logs and unsigned APKs. Each version gets a fresh disposable container.
+The tooling revision and Java/build-tools setup match GeoWeather and Luma Store.
+
+Only candidate metadata, app metadata assets and srclib recipes are mounted
+read-only into the container. Signing keys and checkout credentials are not
+exposed. Unlike pre-release app CI, these release checks retain the real
+metadata's `Binaries` field to verify the published reference APK when specified.
+A failed test blocks the batch. This is not a submission to F-Droid's official
+build infrastructure.
+
 ### How to use
 
 1. At first, you should [install the F-Droid app](https://f-droid.org/), it's an alternative app store for Android.
