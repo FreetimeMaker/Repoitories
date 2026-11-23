@@ -42,6 +42,7 @@
             <section class="package" id="fdroid">
                 <p class="eyebrow">Android</p>
                 <h2>F-Droid</h2>
+                <p id="fdroid-app-count" role="status"></p>
                 <p>
                     Scan the QR code or open the link to add the repository to
                     your Android client.
@@ -113,5 +114,28 @@ gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
             </section>
         </main>
         <footer><p>&copy; 2026 Freetime Maker</p></footer>
+        <script>
+            const appCount = document.getElementById("fdroid-app-count");
+            fetch("fdroid/repo/index-v2.json")
+                .then((response) => {
+                    if (!response.ok)
+                        throw new Error("F-Droid index unavailable");
+                    return response.json();
+                })
+                .then(({ packages }) => {
+                    if (
+                        !packages ||
+                        typeof packages !== "object" ||
+                        Array.isArray(packages)
+                    ) {
+                        throw new Error("Invalid F-Droid package index");
+                    }
+                    const count = Object.keys(packages).length;
+                    appCount.textContent = `${count} ${count === 1 ? "app" : "apps"} available`;
+                })
+                .catch(() => {
+                    appCount.textContent = "App count unavailable.";
+                });
+        </script>
     </body>
 </html>
