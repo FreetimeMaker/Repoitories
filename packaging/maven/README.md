@@ -60,6 +60,25 @@ prunes files or replaces a versioned file with different bytes. Matching local
 files are reused, so metadata changes and new versions are picked up by changing
 pins, not by following a mutable `latest` URL or discovering new releases.
 
+## F-Droid source builds
+
+F-Droid's source scanner uses an allowlist of Maven repository URLs maintained
+in `fdroidserver`. A valid Maven layout, POM metadata, checksums, or signatures
+do not add a repository to that list. This repository's F-Droid workflow does
+not patch the scanner to allow `https://repo.free-time.me/maven`.
+
+To use this endpoint without a local exception, request its inclusion upstream
+in [fdroidserver](https://gitlab.com/fdroid/fdroidserver), subject to F-Droid's
+review. Once accepted, the workflow must use a revision containing that change.
+Alternatively, publish the required libraries to an already allowed repository
+such as Maven Central and update consuming apps to resolve them there. That
+publication and those app changes must happen in the producer and app projects;
+changing this Maven server alone cannot make its URL known to F-Droid.
+
+Until then, source builds that reference this endpoint may fail the scanner's
+unknown-Maven-repository check. Do not suppress that check or disguise the URL
+as a different repository.
+
 ## Gradle `maven-publish`
 
 In the **trusted producer project**, keep its real `MavenPublication` definitions
