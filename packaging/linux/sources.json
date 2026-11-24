@@ -3,12 +3,20 @@
     {
       "github_latest": "FreetimeMaker/XMRiGUI-Linux",
       "asset_prefix": "xmrigui_"
+    },
+    {
+      "github_latest": "FreetimeMaker/License-Generator",
+      "asset_prefix": "license-gen_"
     }
   ],
   "yum": [
     {
       "github_latest": "FreetimeMaker/XMRiGUI-Linux",
       "asset_prefix": "xmrigui-"
+    },
+    {
+      "github_latest": "FreetimeMaker/License-Generator",
+      "asset_prefix": "license-gen-"
     }
   ]
 }
