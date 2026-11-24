@@ -2,6 +2,10 @@
   "fingerprint": "E0C7B84FAF8A9BD74ED0D40592F06B1023F0829A",
   "assets": [
     {
+      "url": "https://github.com/FreetimeMaker/License-Generator/releases/download/v1.0.0/license-gen_1.0.0_all.deb",
+      "sha256": "92e7a89919539bc517dbcaf98262b0f2f6f93bca00fe0cc66666dbbdffdcb31d"
+    },
+    {
       "url": "https://github.com/FreetimeMaker/XMRiGUI-Linux/releases/download/v2.0.0/xmrigui_2.0.0_amd64.deb",
       "sha256": "ddbb125d9352cf17852c3ccec98dd2532887acbe91cdf0fc9068ebfc10f28102"
     }

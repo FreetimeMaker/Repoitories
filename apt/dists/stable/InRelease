@@ -4,33 +4,33 @@ Hash: SHA256
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Thu, 19 Nov 2026 13:54:47 +0000
+Date: Tue, 24 Nov 2026 11:53:46 +0000
 Label: Freetime
 Origin: Freetime
 Suite: stable
 MD5Sum:
- 76760aeea80592871ed96ef653fc1358              434 main/binary-amd64/Packages
- 9822019f61fdcc5a96956dfc0b3afcc0              345 main/binary-amd64/Packages.gz
+ d7318588e2aa649bfda8fc7568295adb              891 main/binary-amd64/Packages
+ 54d6dffd3eab39628ca6e1b19bdbcdc5              519 main/binary-amd64/Packages.gz
 SHA1:
- 57654172929d97a5e45a6043fbb1b566826d2555              434 main/binary-amd64/Packages
- a86d4c35c6a951365b239d07bae67a575d094195              345 main/binary-amd64/Packages.gz
+ dbba5e6311714278190d1a19f4f5b79b400b0027              891 main/binary-amd64/Packages
+ 78875c983c77d0b1680b4c717148bdb8d1a3ca7d              519 main/binary-amd64/Packages.gz
 SHA256:
- 7157551ed8318812d428aca91de3966b794cea5b9f1d752ec879e700a47e3786              434 main/binary-amd64/Packages
- 44cfd012273c5a88187dfa60c762d2aed407c48b91864926ade05464d8fce6db              345 main/binary-amd64/Packages.gz
+ 05efde40ca9ca2e8cd77306b1db78f589307b68e8a4682c9db531cb084a3a07e              891 main/binary-amd64/Packages
+ e13d8db512608cd1c98ed17284cbbd1ebdf879e466f1f279abd2e84bfd2d71fe              519 main/binary-amd64/Packages.gz
 SHA512:
- 92d2eded1fdef15dfe204b972f452051be491825bd3ebd795c467b0c9c90a41a8ef98073e1c086838799846b8939d9f216ed966f0d9f8a54e48a3692a6c3fe7e              434 main/binary-amd64/Packages
- f8d87520bf20f5dd6a21979d6db4826d8caca4f6d0189b29182866c074552f59c99f879fc03e982052a652034c48d4fc818ca3728167c9d39d0581875ef630d8              345 main/binary-amd64/Packages.gz
+ 717a7692496141fd0abd9d84a388d7901449e7967f882bee6b01c35e240404e9ac318ca947ac9fa591d579d6d779e72bf7226b0125a98a482bf47eae2286157f              891 main/binary-amd64/Packages
+ edc7b92570d0eea12e40437fb9f79a8f530a580ce55ee5e44b56748f1d9bfd07df8a233b1abb39f4c6310729d6a44fef95ef1378b58db2465469d1a5769fc828              519 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAEBCAAdFiEE4Me4T6+Km9dO0NQFkvBrECPwgpoFAmr+/6cACgkQkvBrECPw
-gpomYAwAkPjK+NBLqOW6KPsbqhEPA6nGF2YmVuNIeQB1eZ7BBpjiYQecKbGcxu3F
-G4Z8LmoIhO8uSc6o6xfKUL0tY3i2TZ5/aJwjqET9Kiy8wNSgxjglMPgyrq1rvJ3i
-mXY1A1fzoG2C+NmmzckYjz7j8yKDnTuOyk4tOS0rUkP8BXLjcZkkUd1O1gGs2SZX
-41gDICVg7JmUd/VrLRGNTWr6AGsyQEoFG/6NRWZjSIF0zZzQ/XFgdacu+O6njKNh
-klGZTKDvYq0Rg/TjXoQQASA5s6sxZ+moF2cLn1hpjp+K/6ma6i8HQtP5pBcYdTOR
-fir+yn7OU4dg2ImFHCVPvhBA3kBHLZdLkH52r12EUnafpI1ot5e28zOKtnZx5ytX
-WyFMvLSQyPPEEeSKJsDY8NSM5ejU1yNaskHUU370irIbaLcSxN4tjPaxNu+Yf04e
-6KRKF0cehppGWrp7CmDB5SZuncrixIrSPD6wGnnMP+PL/QLG0opzzAQKHaVjktdh
-a7PO+QtA
-=6pIp
+iQGzBAEBCAAdFiEE4Me4T6+Km9dO0NQFkvBrECPwgpoFAmsFesoACgkQkvBrECPw
+gpqB2Qv9G4JSSVZzUzQp4yxvfuy9NCsmVBRxG8uR6/PIrDFoZMlExzu+B86ch23S
+zh5mRiSDE/4oCRM2lVsPDArVDhOCCylNZ+0Ngrr38j1DfZlYMbDhARsX/SWor/F6
+YlmJAobIb7dicYyuuCRDI+NVU1ZcenJ9c4vXG+GOVFZHTKD2vQe+qevhT9yVEdDu
+0A58QDr1hFYBJ3R1djLNsJYuado7C458hCoWI3SMZK3N3vHfGeQu5P0tjxZMnJ7f
+oBYy4kwBefsKw6KWnVsqAt9QrDH+oPD7J8FBM7PQ4Ud2ocjhG0RuRNg4TlDbfkcJ
+6RPNjcnXZBDeBpDJYu8lZQPtvaTEzq9iFIKb879/vl5Gr7Wo7jZVIAlezj8wPZ2R
+14v3IxiJIK4GDsg3+EUcSNLtcd4pH9BjdLs2kh6fN5MF2Tv5irfM8taRQu42LglG
+vQ7hxtnE3Bni8vRrJ74LpxkRvH26eIF87L1e7IxxFTGbzKQh9IF7vgjpQJ7K/K1I
+Sf10zsHv
+=KSrq
 -----END PGP SIGNATURE-----

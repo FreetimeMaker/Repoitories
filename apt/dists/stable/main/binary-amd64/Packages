@@ -11,3 +11,16 @@ SHA1: 3ae7210c576304445381382b508891825411ec24
 SHA256: ddbb125d9352cf17852c3ccec98dd2532887acbe91cdf0fc9068ebfc10f28102
 Description: GUI for XMRig crypto miner
 
+Package: license-gen
+Source: license-gen
+Version: 1.0.0
+Architecture: all
+Maintainer: Freetime Maker <FreetimeMaker@proton.me>
+Depends: python3 (>= 3.9), python3-pyqt6
+Filename: pool/main/license-gen_1.0.0_all.deb
+Size: 37896
+MD5sum: 012c722044a9d7be058e61765153f64a
+SHA1: 23bf5c66a67daabce65a68c99958bdc9d2869cbe
+SHA256: 92e7a89919539bc517dbcaf98262b0f2f6f93bca00fe0cc66666dbbdffdcb31d
+Description: A CLI and GUI License chooser for Open Source Software.
+
