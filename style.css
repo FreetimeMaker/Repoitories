@@ -227,3 +227,16 @@ footer {
         transition: none;
     }
 }
+
+.catalog {
+    margin-block: 1rem;
+    padding: .85rem 1rem;
+    border-radius: 1.25rem;
+    background: var(--inset);
+    overflow-wrap: anywhere;
+}
+
+.catalog h3 { margin: 0; font-size: 1rem; }
+.catalog ul { margin: .35rem 0 0; padding-inline-start: 1.25rem; }
+.catalog small { display: block; }
+.catalog p { margin: .35rem 0 0; }
