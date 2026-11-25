@@ -110,7 +110,9 @@ def build_ref(metadata):
     version = data.get("CurrentVersionCode")
     if version is not None:
         for build in data.get("Builds", []):
-            if str(build.get("versionCode")) == str(version) and not build.get("disable"):
+            if str(build.get("versionCode")) == str(version) and not build.get(
+                "disable"
+            ):
                 ref = build.get("commit")
                 if isinstance(ref, str) and ref.strip():
                     return ref
@@ -138,7 +140,12 @@ def main():
         repo = match[1].removesuffix(".git")
         try:
             sync(repo, metadata.stem, build_ref(metadata))
-        except (subprocess.CalledProcessError, ValueError, KeyError, yaml.YAMLError) as error:
+        except (
+            subprocess.CalledProcessError,
+            ValueError,
+            KeyError,
+            yaml.YAMLError,
+        ) as error:
             print(
                 f"Warning: keeping local listings for {metadata.stem}: {error}",
                 file=sys.stderr,

@@ -123,7 +123,9 @@ def import_release(staged, output, version):
         artifacts.setdefault(parts[2], set()).add(relative.as_posix())
 
     roots = set(MODULES)
-    targets = {module + suffix for module in MODULES for suffix in ("-android", "-desktop")}
+    targets = {
+        module + suffix for module in MODULES for suffix in ("-android", "-desktop")
+    }
     # Unified releases attach target binaries to the root Maven coordinate.
     split = bool(targets & artifacts.keys())
     expected = roots | targets if split else roots

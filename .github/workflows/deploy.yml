@@ -79,6 +79,12 @@ jobs:
             echo '::error::The package tree exceeds the 1 GB GitHub Pages site limit.'
             exit 1
           fi
+      - name: Install Zstandard if needed
+        run: |
+          if ! command -v zstd >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y zstd
+          fi
       - name: Render package catalogs and counts
         run: python3 packaging/site-counts.py _site
       - uses: actions/configure-pages@v6

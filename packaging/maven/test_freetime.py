@@ -9,7 +9,11 @@ from sync import metadata_versions, xml_root
 
 def stage(root, version, unified=False):
     for module in MODULES:
-        targets = (("", "jar"),) if unified else (("", "jar"), ("-android", "aar"), ("-desktop", "jar"))
+        targets = (
+            (("", "jar"),)
+            if unified
+            else (("", "jar"), ("-android", "aar"), ("-desktop", "jar"))
+        )
         for suffix, binary in targets:
             name = module + suffix
             artifact = root / "com/freetime" / name
