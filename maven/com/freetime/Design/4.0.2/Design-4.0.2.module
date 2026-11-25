@@ -1,0 +1,424 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.freetime",
+    "module": "Design",
+    "version": "4.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.10.0-alpha05"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "backdrop",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "shapes",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Design-4.0.2.jar",
+          "url": "Design-4.0.2.jar",
+          "size": 769,
+          "sha512": "102df2360d947dc0dd41e4b2ca6bfe5d9830ad5d39716ed5f7013a0e8a8a9e6bee3fdd20f8da5caa8c5f3d81d97678210c401d6fe3920db2ad3938cac7417eaa",
+          "sha256": "f3d30128fe8869b3be43890bd5bb152cd3ad96eca9c9656b7e1fd24ff2616516",
+          "sha1": "6b31585c7ce86e7158ce9bfe336b5585bf140ffc",
+          "md5": "01eb3c987d9a6734308509850e364bfe"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "Design-4.0.2-sources.jar",
+          "url": "Design-4.0.2-sources.jar",
+          "size": 66323,
+          "sha512": "ff839dbef0ee5d13c0422287547ff5c35820c8cd0c112d8167bb956d2c4d63a1c598cb80c358ebb77e7b96acf98f5627c11bf7adfd128b92a36fce3716dfa9d6",
+          "sha256": "02372c570e113eeaac0aaf7423d8d555ff815a6c6534b9ebeb8a087cedebda0b",
+          "sha1": "b082626a23033d8f95eeba3d68b3c02e56ff1570",
+          "md5": "778bf36f4e55edaef4d27d36f0b41711"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.10.0-alpha05"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "backdrop",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "shapes",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Design-4.0.2-android.aar",
+          "url": "Design-4.0.2-android.aar",
+          "size": 457605,
+          "sha512": "1b28d472086e4b4c6949342ee953866dd254a58181d75e64b90f983c9fccb11da2ea421a561cc3748d3f0959bc3062049c790ca11d8bea6502768641446d7754",
+          "sha256": "4e15e9c24cc893436cad43e894afa43ad76db9b085fc08330c8acc7a6422e657",
+          "sha1": "433ba11ae673ed309c86af60a5fc83f73ccc18f9",
+          "md5": "aaf1c86524cbf4af7d87b71273f0ba48"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.10.0-alpha05"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "backdrop",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "shapes",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-ui-tooling-preview",
+          "version": {
+            "requires": "1.12.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Design-4.0.2-android.aar",
+          "url": "Design-4.0.2-android.aar",
+          "size": 457605,
+          "sha512": "1b28d472086e4b4c6949342ee953866dd254a58181d75e64b90f983c9fccb11da2ea421a561cc3748d3f0959bc3062049c790ca11d8bea6502768641446d7754",
+          "sha256": "4e15e9c24cc893436cad43e894afa43ad76db9b085fc08330c8acc7a6422e657",
+          "sha1": "433ba11ae673ed309c86af60a5fc83f73ccc18f9",
+          "md5": "aaf1c86524cbf4af7d87b71273f0ba48"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "Design-4.0.2-android-sources.jar",
+          "url": "Design-4.0.2-android-sources.jar",
+          "size": 67478,
+          "sha512": "6e4529192cad072084992213a4c77715c10ae652e9602e366466d0229793761f5a7d9f29bfb151702b12d84e1495a1665434d5f5d2d7f26f2ffe77d96e325bff",
+          "sha256": "cbfb7224fadc6f65c47149f6a8cff6188198e4e55105488d29c75cecdff231d3",
+          "sha1": "90f3dc56bbc986cc556d0f6483c2935004508838",
+          "md5": "c208739d8185661e95f56b7ee0913f19"
+        }
+      ]
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.10.0-alpha05"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "backdrop",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "shapes",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Design-4.0.2-desktop.jar",
+          "url": "Design-4.0.2-desktop.jar",
+          "size": 470693,
+          "sha512": "78610376f9deffa1e264c6facfc80c3a0cace3370b40ac362eae761809266af3f2a33cf9a14bda16a6d5b2cef6112785422d9618b9316fb74852e7db9f11e41a",
+          "sha256": "8ee4d4b13f4aea927366482209020912268c2dab45507e60899e5912b2b672db",
+          "sha1": "8c6a954c4206a4bee794cc7f4f568e43811ec993",
+          "md5": "0669b62cdd9e92e506701159da176552"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.10.0-alpha05"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "backdrop",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "io.github.kyant0",
+          "module": "shapes",
+          "version": {
+            "requires": "1.2.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-ui-tooling-preview",
+          "version": {
+            "requires": "1.12.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Design-4.0.2-desktop.jar",
+          "url": "Design-4.0.2-desktop.jar",
+          "size": 470693,
+          "sha512": "78610376f9deffa1e264c6facfc80c3a0cace3370b40ac362eae761809266af3f2a33cf9a14bda16a6d5b2cef6112785422d9618b9316fb74852e7db9f11e41a",
+          "sha256": "8ee4d4b13f4aea927366482209020912268c2dab45507e60899e5912b2b672db",
+          "sha1": "8c6a954c4206a4bee794cc7f4f568e43811ec993",
+          "md5": "0669b62cdd9e92e506701159da176552"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "Design-4.0.2-desktop-sources.jar",
+          "url": "Design-4.0.2-desktop-sources.jar",
+          "size": 67360,
+          "sha512": "01d99c2f426f4575cb4b5b0154c564361078851763596d61903b826e88c3d12b3dc411de60977010ea299f5b0101afa616ab3e0e2060a96de129d256e9803cd8",
+          "sha256": "9468b42f4b0119e76a7523cf0e984273509a15900d20b036733d2a58454c9af3",
+          "sha1": "d4bd747bee668a545b30bb4f707d2912c4efd1ba",
+          "md5": "65075a58abb349076b514c8b551d263f"
+        }
+      ]
+    }
+  ]
+}

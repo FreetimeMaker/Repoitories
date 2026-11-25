@@ -1,0 +1,326 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.freetime",
+    "module": "Browser",
+    "version": "4.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.9.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Browser-4.0.2.jar",
+          "url": "Browser-4.0.2.jar",
+          "size": 736,
+          "sha512": "d59c652a0e2dc5553e66111aa85320f90b6b999781904afa1ecf372007da77719a133b3d58d4f40a6158d355ea09c2b003f046528a4a372db56ca7bbb11e65d7",
+          "sha256": "3c9e589dcd585ddb5ad4a65da641fbf84f2d198784b68b5f6ce2c7f89315b1da",
+          "sha1": "eea1bc588ac89365498fe23cc75cde8940666a69",
+          "md5": "0a4d9e98e8baf6be35e3e510ebf1b3ad"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "Browser-4.0.2-sources.jar",
+          "url": "Browser-4.0.2-sources.jar",
+          "size": 3321,
+          "sha512": "45ea1fc62a4f912479a78ebfadf6e8be041fe6e687944c0886934708e209a3f524f1ee5963d9c4419f5927f6fac7b01a0cb3e44861c3b31b1c9f15181e9a7cac",
+          "sha256": "d07d490bb6697c625f094119303592040cdc5d215cf90a56ecdf98d43513c55e",
+          "sha1": "26309a17fffb4e1d78851bfa1fa2e1cd4f821ee5",
+          "md5": "7c1dae1fae9960e8007fcee3e3844f45"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Browser-4.0.2-android.aar",
+          "url": "Browser-4.0.2-android.aar",
+          "size": 48802,
+          "sha512": "dbef454d3703438ea3316ad25c62b878672179bcb08f5ebea069dab918fab3cb3061f87eccbf6c87ecd2e3765d4dd99abfb5579d8566bd1c27b0826cb6c4c310",
+          "sha256": "77e502de6cce35aa6ea80890b7e6055d2596e11138b915115ed7f980fc1f4e69",
+          "sha1": "282ddf987940cb8eb1168938701c488c142679da",
+          "md5": "af25262c11794f0c1dbcbb433ad1c9f2"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Browser-4.0.2-android.aar",
+          "url": "Browser-4.0.2-android.aar",
+          "size": 48802,
+          "sha512": "dbef454d3703438ea3316ad25c62b878672179bcb08f5ebea069dab918fab3cb3061f87eccbf6c87ecd2e3765d4dd99abfb5579d8566bd1c27b0826cb6c4c310",
+          "sha256": "77e502de6cce35aa6ea80890b7e6055d2596e11138b915115ed7f980fc1f4e69",
+          "sha1": "282ddf987940cb8eb1168938701c488c142679da",
+          "md5": "af25262c11794f0c1dbcbb433ad1c9f2"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "Browser-4.0.2-android-sources.jar",
+          "url": "Browser-4.0.2-android-sources.jar",
+          "size": 5834,
+          "sha512": "0e643dc9abf00a33907247b828fda6f342ea6edfed0faa664d25f924390f5fc69922d614f4b5d430058c779da8ce4d2ec9b0989f6cabc7b204e0a81685ab7335",
+          "sha256": "2e20afe09b4c83850c2b0ce2d022e5b967e1136313c3801b7e5f233dce7f7842",
+          "sha1": "96ec146848697242ab0fed637dee7d13e953149e",
+          "md5": "b31f8d41422aee88a503a478894c6e3b"
+        }
+      ]
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Browser-4.0.2-desktop.jar",
+          "url": "Browser-4.0.2-desktop.jar",
+          "size": 43408,
+          "sha512": "b2671e31ba4c6cb05c594390cd256cc4d470208f116a9af49c17e827b41524e0f4a258559f853c52f0e30d1e4d37b774c597c1274aa43f1bb53ccbe255729ab2",
+          "sha256": "86ccf82a508319504ea6b3d81e43eeb8b05bb5d54aa32c8554ffca064b11dfbc",
+          "sha1": "3ce51b25d39874527d32049d799714b05ebc5ba9",
+          "md5": "2ccfeb4910ab66e369d5861c2a991c36"
+        }
+      ]
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.freetime",
+          "module": "Core",
+          "version": {
+            "requires": "4.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.12.2"
+          }
+        },
+        {
+          "group": "com.freetime",
+          "module": "Design",
+          "version": {
+            "requires": "4.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Browser-4.0.2-desktop.jar",
+          "url": "Browser-4.0.2-desktop.jar",
+          "size": 43408,
+          "sha512": "b2671e31ba4c6cb05c594390cd256cc4d470208f116a9af49c17e827b41524e0f4a258559f853c52f0e30d1e4d37b774c597c1274aa43f1bb53ccbe255729ab2",
+          "sha256": "86ccf82a508319504ea6b3d81e43eeb8b05bb5d54aa32c8554ffca064b11dfbc",
+          "sha1": "3ce51b25d39874527d32049d799714b05ebc5ba9",
+          "md5": "2ccfeb4910ab66e369d5861c2a991c36"
+        }
+      ]
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "Browser-4.0.2-desktop-sources.jar",
+          "url": "Browser-4.0.2-desktop-sources.jar",
+          "size": 4992,
+          "sha512": "a56386edbe9756c0daf126ce8edcd49c5871760ac4d4264e889d8fe55b4a906bd58d969d73550019828e11ee46a633c83abe1c51651af777ce23a6427e284eaa",
+          "sha256": "acbcc5ef61db369a722674decd38df235711ee54cffd6c34ad6bff830c5ed05d",
+          "sha1": "40aeb74dfd00e8156f47125e129f0fbaa3b4d988",
+          "md5": "3647a56c28336d826447068522783380"
+        }
+      ]
+    }
+  ]
+}
