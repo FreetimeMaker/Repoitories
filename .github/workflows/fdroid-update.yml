@@ -103,7 +103,13 @@ jobs:
         run: |
           set -euo pipefail
           fdroid checkupdates --auto --autoonly --allow-dirty "$APP_ID"
-          python3 ./check-metadata-update.py "$APP_ID" "metadata/$APP_ID.yml"
+          if python3 ./check-metadata-update.py "$APP_ID" "metadata/$APP_ID.yml"; then
+            :
+          else
+            status=$?
+            if [[ "$status" != 3 ]]; then exit "$status"; fi
+            git restore -- "metadata/$APP_ID.yml"
+          fi
 
       - name: Ensure no apps were added or removed
         shell: bash
