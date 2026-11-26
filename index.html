@@ -43,10 +43,10 @@
                 <p class="eyebrow">Android</p>
                 <h2>F-Droid</h2>
                 <p class="eyebrow" data-count="fdroid">App count unavailable</p>
-                <div class="catalog">
-                    <h3>Available apps</h3>
+                <details class="catalog">
+                    <summary>Available apps</summary>
                     <!-- catalog:fdroid -->
-                </div>
+                </details>
                 <p id="fdroid-app-count" role="status"></p>
                 <p>
                     Scan the QR code or open the link to add the repository to
@@ -84,23 +84,27 @@
                 <p class="eyebrow" data-count="apt">
                     Package count unavailable
                 </p>
-                <div class="catalog">
-                    <h3>Available packages</h3>
+                <details class="catalog">
+                    <summary>Available packages</summary>
                     <!-- catalog:apt -->
-                </div>
+                </details>
                 <p>Debian and Ubuntu · amd64 · stable main</p>
-                <h3>Download and verify the signing key</h3>
-                <pre><code>curl -fSLo freetime-repository.gpg https://repo.free-time.me/public.gpg
+                <details class="setup-step">
+                    <summary>1. Download and verify the signing key</summary>
+                    <pre><code>curl -fSLo freetime-repository.gpg https://repo.free-time.me/public.gpg
 gpg --show-keys --with-fingerprint freetime-repository.gpg</code></pre>
-                <p>
-                    Compare the fingerprint with one obtained from a trusted
-                    source before installing the key.
-                </p>
-                <h3>Add the repository</h3>
-                <pre><code>sudo install -d -m 0755 /etc/apt/keyrings
+                    <p>
+                        Compare the fingerprint with one obtained from a trusted
+                        source before installing the key.
+                    </p>
+                </details>
+                <details class="setup-step">
+                    <summary>2. Add the repository</summary>
+                    <pre><code>sudo install -d -m 0755 /etc/apt/keyrings
 sudo install -m 0644 freetime-repository.gpg /etc/apt/keyrings/freetime-repository.gpg
 printf '%s\n' 'deb [arch=amd64 signed-by=/etc/apt/keyrings/freetime-repository.gpg] https://repo.free-time.me/apt/ stable main' | sudo tee /etc/apt/sources.list.d/freetime-repository.list
 sudo apt update</code></pre>
+                </details>
             </section>
             <section class="package" id="yum">
                 <p class="eyebrow">Fedora · RHEL</p>
@@ -108,30 +112,36 @@ sudo apt update</code></pre>
                 <p class="eyebrow" data-count="yum">
                     Package count unavailable
                 </p>
-                <div class="catalog">
-                    <h3>Available packages</h3>
+                <details class="catalog">
+                    <summary>Available packages</summary>
                     <!-- catalog:yum -->
-                </div>
+                </details>
                 <p>Fedora and RHEL · x86_64</p>
-                <h3>Download and verify the signing key</h3>
-                <pre><code>curl -fSLo freetime-repository.asc https://repo.free-time.me/yum/x86_64/public.asc
+                <details class="setup-step">
+                    <summary>1. Download and verify the signing key</summary>
+                    <pre><code>curl -fSLo freetime-repository.asc https://repo.free-time.me/yum/x86_64/public.asc
 gpg --show-keys --with-fingerprint freetime-repository.asc</code></pre>
-                <p>
-                    Compare the fingerprint with one obtained from a trusted
-                    source before accepting the key.
-                </p>
-                <h3>Add the repository</h3>
-                <pre><code>sudo nano /etc/yum.repos.d/freetime-repository.repo</code></pre>
-                <p>Paste and save the following configuration:</p>
-                <pre><code>[freetime-repository]
+                    <p>
+                        Compare the fingerprint with one obtained from a trusted
+                        source before accepting the key.
+                    </p>
+                </details>
+                <details class="setup-step">
+                    <summary>2. Add the repository</summary>
+                    <pre><code>sudo nano /etc/yum.repos.d/freetime-repository.repo</code></pre>
+                    <p>Paste and save the following configuration:</p>
+                    <pre><code>[freetime-repository]
 name=Freetime Repository
 baseurl=https://repo.free-time.me/yum/x86_64/
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
-                <h3>Refresh metadata and install a package</h3>
-                <pre><code>sudo dnf --refresh makecache
+                </details>
+                <details class="setup-step">
+                    <summary>3. Refresh package metadata</summary>
+                    <pre><code>sudo dnf --refresh makecache</code></pre>
+                </details>
             </section>
             <section class="package" id="maven">
                 <p class="eyebrow">Java · Kotlin</p>
@@ -139,17 +149,20 @@ gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
                 <p class="eyebrow" data-count="maven">
                     Package count unavailable
                 </p>
-                <div class="catalog">
-                    <h3>Available artifacts</h3>
+                <details class="catalog">
+                    <summary>Available artifacts</summary>
                     <!-- catalog:maven -->
-                </div>
-                <p>
-                    Libraries for Java and Kotlin. Add the following repository
-                    in your Gradle Kotlin DSL configuration:
-                </p>
-                <pre><code>repositories {
+                </details>
+                <details class="setup-step">
+                    <summary>Add the Gradle repository</summary>
+                    <p>
+                        Libraries for Java and Kotlin. Add the following
+                        repository in your Gradle Kotlin DSL configuration:
+                    </p>
+                    <pre><code>repositories {
     maven { url = uri("https://repo.free-time.me/maven") }
 }</code></pre>
+                </details>
             </section>
         </main>
         <footer><p>&copy; 2026 Freetime Maker</p></footer>
