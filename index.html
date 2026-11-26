@@ -89,12 +89,18 @@
                     <!-- catalog:apt -->
                 </div>
                 <p>Debian and Ubuntu · amd64 · stable main</p>
+                <h3>Download and verify the signing key</h3>
+                <pre><code>curl -fSLo freetime-repository.gpg https://repo.free-time.me/public.gpg
+gpg --show-keys --with-fingerprint freetime-repository.gpg</code></pre>
                 <p>
-                    After verifying the repository key and installing it as
-                    <code>/etc/apt/keyrings/freetime-repository.gpg</code>, add
-                    this entry to your APT sources:
+                    Compare the fingerprint with one obtained from a trusted
+                    source before installing the key.
                 </p>
-                <pre><code>deb [arch=amd64 signed-by=/etc/apt/keyrings/freetime-repository.gpg] https://repo.free-time.me/apt stable main</code></pre>
+                <h3>Add the repository</h3>
+                <pre><code>sudo install -d -m 0755 /etc/apt/keyrings
+sudo install -m 0644 freetime-repository.gpg /etc/apt/keyrings/freetime-repository.gpg
+printf '%s\n' 'deb [arch=amd64 signed-by=/etc/apt/keyrings/freetime-repository.gpg] https://repo.free-time.me/apt/ stable main' | sudo tee /etc/apt/sources.list.d/freetime-repository.list
+sudo apt update</code></pre>
             </section>
             <section class="package" id="yum">
                 <p class="eyebrow">Fedora · RHEL</p>
@@ -107,11 +113,16 @@
                     <!-- catalog:yum -->
                 </div>
                 <p>Fedora and RHEL · x86_64</p>
+                <h3>Download and verify the signing key</h3>
+                <pre><code>curl -fSLo freetime-repository.asc https://repo.free-time.me/yum/x86_64/public.asc
+gpg --show-keys --with-fingerprint freetime-repository.asc</code></pre>
                 <p>
-                    Save this configuration as
-                    <code>/etc/yum.repos.d/freetime-repository.repo</code> and
-                    verify the key fingerprint before accepting it:
+                    Compare the fingerprint with one obtained from a trusted
+                    source before accepting the key.
                 </p>
+                <h3>Add the repository</h3>
+                <pre><code>sudo nano /etc/yum.repos.d/freetime-repository.repo</code></pre>
+                <p>Paste and save the following configuration:</p>
                 <pre><code>[freetime-repository]
 name=Freetime Repository
 baseurl=https://repo.free-time.me/yum/x86_64/
@@ -119,6 +130,8 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://repo.free-time.me/yum/x86_64/public.asc</code></pre>
+                <h3>Refresh metadata and install a package</h3>
+                <pre><code>sudo dnf --refresh makecache
             </section>
             <section class="package" id="maven">
                 <p class="eyebrow">Java · Kotlin</p>
