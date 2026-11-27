@@ -13,14 +13,14 @@ Description: GUI wrapper for XMRig.
 
 Package: license-gen
 Source: license-gen
-Version: 1.1.0
+Version: 1.2.0
 Architecture: all
 Maintainer: Freetime Maker <FreetimeMaker@proton.me>
 Depends: python3 (>= 3.9), python3-pyqt6
-Filename: pool/main/license-gen_1.1.0_all.deb
-Size: 193154
-MD5sum: 718cc8bcaf37096c1d2eebac08d833e4
-SHA1: ef9553e1a95b50136028ecf798d058b5746c543a
-SHA256: 300351726dc7c7140f45411435dd374e05f1d1004fda2d4a0fbf5efd2ad5e87f
+Filename: pool/main/license-gen_1.2.0_all.deb
+Size: 195372
+MD5sum: b171d35120b64d3715bf52c60dabcee0
+SHA1: 70e513b890145910362d28d1569caabe95ef9308
+SHA256: 746af0fb0e9ab4f9f0659920663d5adc84417ff6d9f51e7d70fd58960868ed1b
 Description: A CLI and GUI License chooser for Open Source Software.
 
