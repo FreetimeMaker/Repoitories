@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
+from collections import defaultdict
 from html import escape
 from pathlib import Path
 
@@ -19,18 +20,25 @@ def package_catalog(site):
         ].items():
             if app.get("versions"):
                 names = app.get("metadata", {}).get("name", {})
-                apps[app_id] = names.get("en-US") or next(iter(names.values()), app_id)
+                name = names.get("en-US") or next(iter(names.values()), app_id)
+                versions = set()
+                for version in app["versions"].values():
+                    manifest = version["manifest"]
+                    code = manifest["versionCode"]
+                    title = manifest.get("versionName")
+                    versions.add((code, f"{title} ({code})" if title else str(code)))
+                apps[app_id] = (name, [title for _, title in sorted(versions, reverse=True)])
 
-    apt = set()
+    apt = defaultdict(set)
     for index in (site / "apt/dists").glob("*/main/binary-*/Packages.gz"):
         with gzip.open(index, "rt", encoding="utf-8") as stream:
-            apt.update(
-                line.split(":", 1)[1].strip()
-                for line in stream
-                if line.startswith("Package:")
-            )
+            for stanza in stream.read().split("\n\n"):
+                fields = dict(line.split(": ", 1) for line in stanza.splitlines()
+                              if line.startswith(("Package: ", "Version: ", "Architecture: ")))
+                if fields:
+                    apt[fields["Package"]].add(f"{fields['Version']} · {fields['Architecture']}")
 
-    yum = set()
+    yum = defaultdict(set)
     for index in (site / "yum").glob("*/repodata/repomd.xml"):
         location = ET.parse(index).find("{*}data[@type='primary']/{*}location")
         if location is None:
@@ -44,21 +52,27 @@ def package_catalog(site):
                 root = ET.parse(stream).getroot()
         else:
             raise ValueError(f"Unsupported RPM primary index format: {primary}")
-        yum.update(
-            entry.text for entry in root.findall("{*}package/{*}name") if entry.text
-        )
+        for package in root.findall("{*}package"):
+            name = package.findtext("{*}name")
+            arch = package.findtext("{*}arch")
+            version = package.find("{*}version").attrib
+            epoch = version.get("epoch", "0")
+            prefix = f"{epoch}:" if epoch != "0" else ""
+            yum[name].add(f"{prefix}{version['ver']}-{version['rel']} · {arch}")
 
     maven = site / "maven"
-    artifacts = set()
+    artifacts = defaultdict(set)
     for pom in maven.rglob("*.pom"):
-        *group, artifact, _, _ = pom.relative_to(maven).parts
-        artifacts.add(f"{'.'.join(group)}:{artifact}")
+        *group, artifact, version, _ = pom.relative_to(maven).parts
+        artifacts[f"{'.'.join(group)}:{artifact}"].add(version)
     return {
-        "fdroid": [(name, app_id) for app_id, name in apps.items()],
-        "apt": [(name, "") for name in apt],
-        "yum": [(name, "") for name in yum],
-        "maven": [(name, "") for name in artifacts],
+        "fdroid": [(name, app_id, versions) for app_id, (name, versions) in apps.items()],
+        **{
+            kind: [(name, "", sorted(versions)) for name, versions in packages.items()]
+            for kind, packages in (("apt", apt), ("yum", yum), ("maven", artifacts))
+        },
     }
+
 
 
 def render(site):
@@ -77,11 +91,15 @@ def render(site):
         if matches != 1:
             raise ValueError(f"Expected one package count placeholder for {name}")
         rows = []
-        for title, detail in sorted(
+        for title, detail, versions in sorted(
             entries, key=lambda entry: (entry[0].casefold(), entry)
         ):
             suffix = f"<small><code>{escape(detail)}</code></small>" if detail else ""
-            rows.append(f"<li><span>{escape(title)}</span>{suffix}</li>")
+            releases = ", ".join(escape(version) for version in versions)
+            rows.append(
+                f"<li><span>{escape(title)}</span>{suffix}"
+                f"<small>{releases}</small></li>"
+            )
         listing = (
             "<ul>" + "".join(rows) + "</ul>"
             if rows
