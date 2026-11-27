@@ -6,8 +6,8 @@
       "sha256": "e41e6349e0910f40afad2558da9e0a64edebb23d6b7eadfafba59ab854ca9223"
     },
     {
-      "url": "https://github.com/FreetimeMaker/XMRiGUI-Linux/releases/download/v2.0.0/xmrigui-2.0.0-1.fc44.x86_64.rpm",
-      "sha256": "6164b05f8c5944523d420397a8d425032d6e9a58fdb7205e49b47aeec95962b4"
+      "url": "https://github.com/FreetimeMaker/XMRiGUI-Linux/releases/download/v2.1.0/xmrigui-2.1.0-1.fc45.x86_64.rpm",
+      "sha256": "dc18669e5d3cbc6704f03b5e017dbd94be62a75c2c2179344fd79dadade7e66d"
     }
   ]
 }
