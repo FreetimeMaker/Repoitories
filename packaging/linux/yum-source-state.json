@@ -2,8 +2,8 @@
   "fingerprint": "E0C7B84FAF8A9BD74ED0D40592F06B1023F0829A",
   "assets": [
     {
-      "url": "https://github.com/FreetimeMaker/License-Generator/releases/download/v1.1.0/license-gen-1.1.0-1.fc44.noarch.rpm",
-      "sha256": "e41e6349e0910f40afad2558da9e0a64edebb23d6b7eadfafba59ab854ca9223"
+      "url": "https://github.com/FreetimeMaker/License-Generator/releases/download/v1.2.0/license-gen-1.2.0-1.fc45.noarch.rpm",
+      "sha256": "27e262c99b260437e8f5434b537e05ea1f243fa269e9bedd78ce81873154740a"
     },
     {
       "url": "https://github.com/FreetimeMaker/XMRiGUI-Linux/releases/download/v2.1.0/xmrigui-2.1.0-1.fc45.x86_64.rpm",
